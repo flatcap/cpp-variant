@@ -1,8 +1,8 @@
-/* Copyright (c) 2013 Richard Russon (FlatCap)
+/* Copyright (c 2013 Richard Russon (FlatCap
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
+ * Foundation; either version 2 of the License, or (at your option any later
  * version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT
@@ -24,26 +24,38 @@
  */
 int main (int, char *[])
 {
-	std::string str        = "a very long message that exceeds thirty-two characters";
-	bool        one        = ~0;
-	char        eight      = ~0;
-	short       sixteen    = ~0;
-	int         thirty_two = ~0;
-	long        sixty_four = ~0;
+	std::string     str    = "a very long message that exceeds thirty-two characters";
+	bool		b      = ~0;
+	unsigned char	ubyte  = ~0;
+	  signed char	sbyte  = ~0;
+	unsigned short	ushort = ~0;
+	  signed short	sshort = ~0;
+	unsigned int	uint   = ~0;
+	  signed int	sint   = ~0;
+	unsigned long	ulong  = ~0;
+	  signed long	slong  = ~0;
 
-	std::cout << "string str:        " << str        << std::endl;
-	std::cout << "bool   one:        " << one        << std::endl;
-	std::cout << "char   eight:      " << eight      << std::endl;
-	std::cout << "short  sixteen:    " << sixteen    << std::endl;
-	std::cout << "int    thirty_two: " << thirty_two << std::endl;
-	std::cout << "long   sixty_four: " << sixty_four << std::endl;
+	std::cout << "std::string	str:    " << str    << std::endl;
+	std::cout << "bool		b:      " << b      << std::endl;
+	std::cout << "unsigned char	ubyte:  " << ubyte  << std::endl;
+	std::cout << "  signed char	sbyte:  " << sbyte  << std::endl;
+	std::cout << "unsigned short	ushort: " << ushort << std::endl;
+	std::cout << "  signed short	sshort: " << sshort << std::endl;
+	std::cout << "unsigned int	uint:   " << uint   << std::endl;
+	std::cout << "  signed int	sint:   " << sint   << std::endl;
+	std::cout << "unsigned long	ulong:  " << ulong  << std::endl;
+	std::cout << "  signed long	slong:  " << slong  << std::endl;
 
-	Variant v_string (str);
-	Variant v_bool (one);
-	Variant v_byte (eight);
-	Variant v_short (sixteen);
-	Variant v_int (thirty_two);
-	Variant v_long (sixty_four);
+	Variant v_str    (str);
+	Variant v_b      (b);
+	Variant v_ubyte  (ubyte);
+	Variant v_sbyte  (sbyte);
+	Variant v_ushort (ushort);
+	Variant v_sshort (sshort);
+	Variant v_uint   (uint);
+	Variant v_sint   (sint);
+	Variant v_ulong  (ulong);
+	Variant v_slong  (slong);
 
 	return 0;
 }
