@@ -19,6 +19,19 @@
 #define _VARIANT_H_
 
 #include <string>
+#include <iostream>
+
+/* list of coercions
+ *	unset	-> none
+ *	string	-> string
+ *	char	-> char, string
+ *	bool	-> string, bool, byte, short, int, long
+ *	byte	-> string, byte, short, int, long
+ *	short	-> string, short, int, long
+ *	int	-> string, int, long
+ *	long	-> string, long
+ */
+
 
 /**
  * class Variant
@@ -37,22 +50,18 @@ public:
 	Variant (  signed int   value);
 	Variant (unsigned long  value);
 	Variant (  signed long  value);
-	~Variant();
+	virtual ~Variant();
 
-	//Variant & operator= (const Variant &v);
+	Variant (const Variant &v);
+	Variant (const Variant &&v);
+	Variant & operator= (const Variant &v);
 
-private:
-	/* list of coercions
-	 *	unset	-> none
-	 *	string	-> string
-	 *	char	-> char, string
-	 *	bool	-> string, bool, byte, short, int, long
-	 *	byte	-> string, byte, short, int, long
-	 *	short	-> string, short, int, long
-	 *	int	-> string, int, long
-	 *	long	-> string, long
-	 */
+protected:
+	friend void swap (Variant &first, Variant &second);
+	friend std::ostream & operator<< (std::ostream &os, const Variant *v);
+	friend std::ostream & operator<< (std::ostream &os, const Variant &v);
 
+	void clear (void);
 
 	enum class Tag {
 		t_unset,	// Empty

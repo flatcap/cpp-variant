@@ -19,11 +19,19 @@
 
 #include "variant.h"
 
+Variant retval (void)
+{
+	Variant v (std::string ("hello"));
+
+	return v;
+}
+
 /**
  * main
  */
 int main (int, char *[])
 {
+#if 0
 	std::string     str    = "a very long message that exceeds thirty-two characters";
 	bool		b      = ~0;
 	unsigned char	ubyte  = ~0;
@@ -56,6 +64,29 @@ int main (int, char *[])
 	Variant v_sint   (sint);
 	Variant v_ulong  (ulong);
 	Variant v_slong  (slong);
+#endif
+
+#if 0
+	std::cout << v_str   << std::endl;
+	std::cout << v_ubyte << std::endl;
+	std::cout << v_slong << std::endl;
+
+	std::cout << sizeof (v_b)     << std::endl;
+	std::cout << sizeof (v_ulong) << std::endl;
+#endif
+
+#if 0
+	v_b = v_str;
+	Variant v1 = v_ulong;
+	Variant v2 (v_ulong);
+	v_slong = v_ubyte;
+#endif
+
+	Variant v3 = retval();
+	Variant v4 (retval());
+
+	std::cout << v3 << std::endl;
+	std::cout << v4 << std::endl;
 
 	return 0;
 }
