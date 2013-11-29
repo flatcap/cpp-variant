@@ -1,4 +1,4 @@
-/* Copyright (c 2013 Richard Russon (FlatCap
+/* Copyright (c) 2013 Richard Russon (FlatCap)
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -23,7 +23,7 @@ Variant retval (void)
 {
 	Variant v (std::string ("hello"));
 
-	return v;
+	return std::move(v);
 }
 
 /**
