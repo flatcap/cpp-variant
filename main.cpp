@@ -19,13 +19,6 @@
 
 #include "variant.h"
 
-Variant retval (void)
-{
-	Variant v (std::string ("hello"));
-
-	return std::move(v);
-}
-
 /**
  * main
  */
@@ -82,11 +75,29 @@ int main (int, char *[])
 	v_slong = v_ubyte;
 #endif
 
+#if 0
 	Variant v3 = retval();
 	Variant v4 (retval());
 
 	std::cout << v3 << std::endl;
 	std::cout << v4 << std::endl;
+#endif
+
+#if 1
+	Variant v3 = "hello world";
+	//Variant v3 = 42.5;
+
+	std::cout <<               v3 << std::endl;
+	std::cout << (std::string) v3 << std::endl;
+#endif
+
+#if 0
+	std::cout << "marker1" << std::endl;
+	Variant v;
+	std::cout << "marker2" << std::endl;
+	v = std::move(4);
+	std::cout << "marker3" << std::endl;
+#endif
 
 	return 0;
 }

@@ -16,6 +16,7 @@
  */
 
 #include <iostream>
+#include <stdexcept>
 
 #include "variant.h"
 
@@ -29,6 +30,16 @@ Variant::Variant (void)
 }
 
 /**
+ * ~Variant
+ */
+Variant::~Variant()
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	clear();
+}
+
+
+/**
  * Variant (string)
  */
 Variant::Variant (const std::string &value)
@@ -39,12 +50,30 @@ Variant::Variant (const std::string &value)
 }
 
 /**
+ * Variant (char *)
+ */
+Variant::Variant (const char *value) :
+	Variant (std::string (value))
+{
+}
+
+/**
+ * Variant (double)
+ */
+Variant::Variant (double value)
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	type   = Tag::t_double;
+	u_double = value;
+}
+
+/**
  * Variant (bool)
  */
 Variant::Variant (bool value)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type   = Tag::t_unset;
+	type   = Tag::t_bool;
 	u_bool = value;
 }
 
@@ -128,15 +157,6 @@ Variant::Variant (signed long value)
 	u_slong = value;
 }
 
-/**
- * ~Variant
- */
-Variant::~Variant()
-{
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	clear();
-}
-
 
 /**
  * Variant (copy)
@@ -147,41 +167,81 @@ Variant::Variant (const Variant &v)
 	//std::cout << "copy constructor " << this << "\n";
 	std::cout << "copy constructor\n";
 	switch (type) {
-		case Variant::Tag::t_unset:                         break;
-		case Variant::Tag::t_string: u_string = v.u_string; break;
-		case Variant::Tag::t_bool:   u_bool   = v.u_bool;   break;
-		case Variant::Tag::t_ubyte:  u_ubyte  = v.u_ubyte;  break;
-		case Variant::Tag::t_sbyte:  u_sbyte  = v.u_sbyte;  break;
-		case Variant::Tag::t_ushort: u_ushort = v.u_ushort; break;
-		case Variant::Tag::t_sshort: u_sshort = v.u_sshort; break;
-		case Variant::Tag::t_uint:   u_uint   = v.u_uint;   break;
-		case Variant::Tag::t_sint:   u_sint   = v.u_sint;   break;
-		case Variant::Tag::t_ulong:  u_ulong  = v.u_ulong;  break;
-		case Variant::Tag::t_slong:  u_slong  = v.u_slong;  break;
+		case Variant::Tag::t_unset:                        break;
+		case Variant::Tag::t_string: Variant (v.u_string); break;
+		case Variant::Tag::t_double: Variant (v.u_double); break;
+		case Variant::Tag::t_bool:   Variant (v.u_bool);   break;
+		case Variant::Tag::t_ubyte:  Variant (v.u_ubyte);  break;
+		case Variant::Tag::t_sbyte:  Variant (v.u_sbyte);  break;
+		case Variant::Tag::t_ushort: Variant (v.u_ushort); break;
+		case Variant::Tag::t_sshort: Variant (v.u_sshort); break;
+		case Variant::Tag::t_uint:   Variant (v.u_uint);   break;
+		case Variant::Tag::t_sint:   Variant (v.u_sint);   break;
+		case Variant::Tag::t_ulong:  Variant (v.u_ulong);  break;
+		case Variant::Tag::t_slong:  Variant (v.u_slong);  break;
 	}
 }
 
 /**
  * Variant (move)
  */
-Variant::Variant (const Variant &&v)
+Variant::Variant (Variant &&v)
 {
-	//std::cout << "move constructor " << this << "\n";
+	swap(*this, v);
 	std::cout << "move constructor\n";
+}
+
+
+/**
+ * operator= (copy)
+ */
+Variant &
+Variant::operator= (const Variant &v)
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	clear();
 	switch (type) {
-		case Variant::Tag::t_unset:                         break;
-		case Variant::Tag::t_string: u_string = v.u_string; break;
-		case Variant::Tag::t_bool:   u_bool   = v.u_bool;   break;
-		case Variant::Tag::t_ubyte:  u_ubyte  = v.u_ubyte;  break;
-		case Variant::Tag::t_sbyte:  u_sbyte  = v.u_sbyte;  break;
-		case Variant::Tag::t_ushort: u_ushort = v.u_ushort; break;
-		case Variant::Tag::t_sshort: u_sshort = v.u_sshort; break;
-		case Variant::Tag::t_uint:   u_uint   = v.u_uint;   break;
-		case Variant::Tag::t_sint:   u_sint   = v.u_sint;   break;
-		case Variant::Tag::t_ulong:  u_ulong  = v.u_ulong;  break;
-		case Variant::Tag::t_slong:  u_slong  = v.u_slong;  break;
+		case Variant::Tag::t_unset:                        break;
+		case Variant::Tag::t_string: Variant (v.u_string); break;
+		case Variant::Tag::t_double: Variant (v.u_double); break;
+		case Variant::Tag::t_bool:   Variant (v.u_bool);   break;
+		case Variant::Tag::t_ubyte:  Variant (v.u_ubyte);  break;
+		case Variant::Tag::t_sbyte:  Variant (v.u_sbyte);  break;
+		case Variant::Tag::t_ushort: Variant (v.u_ushort); break;
+		case Variant::Tag::t_sshort: Variant (v.u_sshort); break;
+		case Variant::Tag::t_uint:   Variant (v.u_uint);   break;
+		case Variant::Tag::t_sint:   Variant (v.u_sint);   break;
+		case Variant::Tag::t_ulong:  Variant (v.u_ulong);  break;
+		case Variant::Tag::t_slong:  Variant (v.u_slong);  break;
 	}
+
+	return *this;
+}
+
+/**
+ * operator= (move)
+ */
+Variant &
+Variant::operator= (Variant &&v)
+{
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	clear();
+	switch (type) {
+		case Variant::Tag::t_unset:                        break;
+		case Variant::Tag::t_string: Variant (v.u_string); break;
+		case Variant::Tag::t_double: Variant (v.u_double); break;
+		case Variant::Tag::t_bool:   Variant (v.u_bool);   break;
+		case Variant::Tag::t_ubyte:  Variant (v.u_ubyte);  break;
+		case Variant::Tag::t_sbyte:  Variant (v.u_sbyte);  break;
+		case Variant::Tag::t_ushort: Variant (v.u_ushort); break;
+		case Variant::Tag::t_sshort: Variant (v.u_sshort); break;
+		case Variant::Tag::t_uint:   Variant (v.u_uint);   break;
+		case Variant::Tag::t_sint:   Variant (v.u_sint);   break;
+		case Variant::Tag::t_ulong:  Variant (v.u_ulong);  break;
+		case Variant::Tag::t_slong:  Variant (v.u_slong);  break;
+	}
+
+	return *this;
 }
 
 
@@ -217,6 +277,7 @@ operator<< (std::ostream &os, const Variant &v)
 	switch (v.type) {
 		case Variant::Tag::t_unset:  os << "unset";                 break;
 		case Variant::Tag::t_string: os << "string," << v.u_string; break;
+		case Variant::Tag::t_double: os << "double," << v.u_double; break;
 		case Variant::Tag::t_bool:   os << "bool,"   << v.u_bool;   break;
 		case Variant::Tag::t_ubyte:  os << "ubyte,"  << v.u_ubyte;  break;
 		case Variant::Tag::t_sbyte:  os << "sbyte,"  << v.u_sbyte;  break;
@@ -234,48 +295,6 @@ operator<< (std::ostream &os, const Variant &v)
 
 
 /**
- * operator=
- */
-Variant &
-Variant::operator= (const Variant &v)
-{
-	//std::cout << "copy assignment " << this << "\n";
-	std::cout << "copy assignment\n";
-	clear();
-	switch (type) {
-		case Variant::Tag::t_unset:                         break;
-		case Variant::Tag::t_string: u_string = v.u_string; break;
-		case Variant::Tag::t_bool:   u_bool   = v.u_bool;   break;
-		case Variant::Tag::t_ubyte:  u_ubyte  = v.u_ubyte;  break;
-		case Variant::Tag::t_sbyte:  u_sbyte  = v.u_sbyte;  break;
-		case Variant::Tag::t_ushort: u_ushort = v.u_ushort; break;
-		case Variant::Tag::t_sshort: u_sshort = v.u_sshort; break;
-		case Variant::Tag::t_uint:   u_uint   = v.u_uint;   break;
-		case Variant::Tag::t_sint:   u_sint   = v.u_sint;   break;
-		case Variant::Tag::t_ulong:  u_ulong  = v.u_ulong;  break;
-		case Variant::Tag::t_slong:  u_slong  = v.u_slong;  break;
-	}
-#if 0
-	if ((type == Tag::text) && (v.type == Tag::text)) {
-		s = v.s;
-		return *this;
-	}
-
-	if (type == Tag::text) {
-		s.~string();
-	}
-
-	switch (v.type) {
-		case Tag::point: p = v.p; break;	// normal copy
-		case Tag::number: i = v.i; break;
-		case Tag::text: new(&s)(v.s); break;	// placement new
-	}
-	type = v.type;
-#endif
-	return *this;
-}
-
-/**
  * clear
  */
 void
@@ -285,6 +304,142 @@ Variant::clear (void)
 		u_string.std::string::~string();
 	}
 	type = Tag::t_unset;
+}
+
+
+/**
+ * cast (std::string)
+ */
+Variant::operator std::string()
+{
+	switch (type) {
+		case Variant::Tag::t_string: return u_string;			// Match
+
+		case Variant::Tag::t_double: return std::to_string (u_double);	// Promotions
+		case Variant::Tag::t_bool:   return std::to_string (u_bool);
+		case Variant::Tag::t_ubyte:  return std::to_string (u_ubyte);
+		case Variant::Tag::t_sbyte:  return std::to_string (u_sbyte);
+		case Variant::Tag::t_ushort: return std::to_string (u_ushort);
+		case Variant::Tag::t_sshort: return std::to_string (u_sshort);
+		case Variant::Tag::t_uint:   return std::to_string (u_uint);
+		case Variant::Tag::t_sint:   return std::to_string (u_sint);
+		case Variant::Tag::t_ulong:  return std::to_string (u_ulong);
+		case Variant::Tag::t_slong:  return std::to_string (u_slong);
+
+		case Variant::Tag::t_unset:					// Failure
+		default:
+			throw std::runtime_error ("variant not set");
+	}
+}
+
+/**
+ * cast (double)
+ */
+Variant::operator double()
+{
+	if (type == Variant::Tag::t_double)
+		return u_double;
+	else
+		throw std::runtime_error ("variant bad cast");
+}
+
+/**
+ * cast (bool)
+ */
+Variant::operator bool()
+{
+	if (type == Variant::Tag::t_bool)
+		return u_bool;
+	else
+		throw std::runtime_error ("variant bad cast");
+}
+
+/**
+ * cast (unsigned char)
+ */
+Variant::operator unsigned char()
+{
+	if (type == Variant::Tag::t_ubyte)
+		return u_ubyte;
+	else
+		throw std::runtime_error ("variant bad cast");
+}
+
+/**
+ * cast (signed char)
+ */
+Variant::operator signed char()
+{
+	if (type == Variant::Tag::t_sbyte)
+		return u_sbyte;
+	else
+		throw std::runtime_error ("variant bad cast");
+}
+
+/**
+ * cast (unsigned short)
+ */
+Variant::operator unsigned short()
+{
+	if (type == Variant::Tag::t_ushort)
+		return u_ushort;
+	else
+		throw std::runtime_error ("variant bad cast");
+}
+
+/**
+ * cast (signed short)
+ */
+Variant::operator signed short()
+{
+	if (type == Variant::Tag::t_sshort)
+		return u_sshort;
+	else
+		throw std::runtime_error ("variant bad cast");
+}
+
+/**
+ * cast (unsigned int)
+ */
+Variant::operator unsigned int()
+{
+	if (type == Variant::Tag::t_uint)
+		return u_uint;
+	else
+		throw std::runtime_error ("variant bad cast");
+}
+
+/**
+ * cast (signed int)
+ */
+Variant::operator signed int()
+{
+	if (type == Variant::Tag::t_sint)
+		return u_sint;
+	else
+		throw std::runtime_error ("variant bad cast");
+}
+
+/**
+ * cast (unsigned long)
+ */
+Variant::operator unsigned long()
+{
+	if (type == Variant::Tag::t_ulong)
+		return u_ulong;
+	else
+		throw std::runtime_error ("variant bad cast");
+}
+
+/**
+ * cast (signed long)
+ */
+Variant::operator signed long()
+{
+	if (type == Variant::Tag::t_slong)
+		return u_slong;
+	else
+		throw std::runtime_error ("variant bad cast");
 }
 
 

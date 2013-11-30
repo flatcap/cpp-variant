@@ -39,8 +39,12 @@
 class Variant
 {
 public:
-	Variant (void);
-	Variant (const std::string &value);
+	Variant (void);				// default constructor
+	virtual ~Variant();
+
+	Variant (const std::string &value);	// typed constructors
+	Variant (const char *value);
+	Variant (double value);
 	Variant (bool value);
 	Variant (unsigned char  value);
 	Variant (  signed char  value);
@@ -50,11 +54,24 @@ public:
 	Variant (  signed int   value);
 	Variant (unsigned long  value);
 	Variant (  signed long  value);
-	virtual ~Variant();
 
-	Variant (const Variant &v);
-	Variant (const Variant &&v);
-	Variant & operator= (const Variant &v);
+	Variant (const Variant &v);		// copy constructor
+	Variant (Variant &&v);			// move constructor
+
+	Variant & operator= (const Variant &v);	// copy assignment
+	Variant & operator= (Variant &&v);	// move assignment
+
+	operator std::string();
+	operator double();
+	operator bool();
+	operator unsigned char();
+	operator   signed char();
+	operator unsigned short();
+	operator   signed short();
+	operator unsigned int();
+	operator   signed int();
+	operator unsigned long();
+	operator   signed long();
 
 protected:
 	friend void swap (Variant &first, Variant &second);
@@ -66,6 +83,7 @@ protected:
 	enum class Tag {
 		t_unset,	// Empty
 		t_string,	// Text
+		t_double,	// Floating point
 		t_bool,		//  1 bit
 		t_ubyte,	//  8 bits unsigned
 		t_sbyte,	//         signed
@@ -79,6 +97,7 @@ protected:
 
 	union {
 		std::string	u_string;
+		double		u_double;
 		bool		u_bool;
 		unsigned char	u_ubyte;
 		  signed char	u_sbyte;
