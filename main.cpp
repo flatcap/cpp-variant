@@ -72,21 +72,21 @@ void test1 (void)
  */
 void cast01 (void)
 {
-	Variant v;
+	Variant v1;
 
-	std::cout << v << '\n';
+	std::cout << v1 << '\n';
 
-	try { string   a01 = (string)   v; std::cout << "success: a01 = " <<       a01 << "\n"; } catch (exception &e) { std::cout << "error:   a01\n"; }
-	try { double   a02 = (double)   v; std::cout << "error:   a02 = " <<       a02 << "\n"; } catch (exception &e) { std::cout << "success: a02\n"; }
-	try { bool     a03 = (bool)     v; std::cout << "error:   a03 = " <<       a03 << "\n"; } catch (exception &e) { std::cout << "success: a03\n"; }
-	try { uint8_t  a04 = (uint8_t)  v; std::cout << "error:   a04 = " << (int) a04 << "\n"; } catch (exception &e) { std::cout << "success: a04\n"; }
-	try { int8_t   a05 = (int8_t)   v; std::cout << "error:   a05 = " << (int) a05 << "\n"; } catch (exception &e) { std::cout << "success: a05\n"; }
-	try { uint16_t a06 = (uint16_t) v; std::cout << "error:   a06 = " <<       a06 << "\n"; } catch (exception &e) { std::cout << "success: a06\n"; }
-	try { int16_t  a07 = (int16_t)  v; std::cout << "error:   a07 = " <<       a07 << "\n"; } catch (exception &e) { std::cout << "success: a07\n"; }
-	try { uint32_t a08 = (uint32_t) v; std::cout << "error:   a08 = " <<       a08 << "\n"; } catch (exception &e) { std::cout << "success: a08\n"; }
-	try { int32_t  a09 = (int32_t)  v; std::cout << "error:   a09 = " <<       a09 << "\n"; } catch (exception &e) { std::cout << "success: a09\n"; }
-	try { uint64_t a10 = (uint64_t) v; std::cout << "error:   a10 = " <<       a10 << "\n"; } catch (exception &e) { std::cout << "success: a10\n"; }
-	try { int64_t  a11 = (int64_t)  v; std::cout << "error:   a11 = " <<       a11 << "\n"; } catch (exception &e) { std::cout << "success: a11\n"; }
+	try { string   a01 = (string)   v1; std::cout << "success: a01 = " <<       a01 << "\n"; } catch (exception &e) { std::cout << "error:   a01\n"; }
+	try { double   a02 = (double)   v1; std::cout << "error:   a02 = " <<       a02 << "\n"; } catch (exception &e) { std::cout << "success: a02\n"; }
+	try { bool     a03 = (bool)     v1; std::cout << "error:   a03 = " <<       a03 << "\n"; } catch (exception &e) { std::cout << "success: a03\n"; }
+	try { uint8_t  a04 = (uint8_t)  v1; std::cout << "error:   a04 = " << (int) a04 << "\n"; } catch (exception &e) { std::cout << "success: a04\n"; }
+	try { int8_t   a05 = (int8_t)   v1; std::cout << "error:   a05 = " << (int) a05 << "\n"; } catch (exception &e) { std::cout << "success: a05\n"; }
+	try { uint16_t a06 = (uint16_t) v1; std::cout << "error:   a06 = " <<       a06 << "\n"; } catch (exception &e) { std::cout << "success: a06\n"; }
+	try { int16_t  a07 = (int16_t)  v1; std::cout << "error:   a07 = " <<       a07 << "\n"; } catch (exception &e) { std::cout << "success: a07\n"; }
+	try { uint32_t a08 = (uint32_t) v1; std::cout << "error:   a08 = " <<       a08 << "\n"; } catch (exception &e) { std::cout << "success: a08\n"; }
+	try { int32_t  a09 = (int32_t)  v1; std::cout << "error:   a09 = " <<       a09 << "\n"; } catch (exception &e) { std::cout << "success: a09\n"; }
+	try { uint64_t a10 = (uint64_t) v1; std::cout << "error:   a10 = " <<       a10 << "\n"; } catch (exception &e) { std::cout << "success: a10\n"; }
+	try { int64_t  a11 = (int64_t)  v1; std::cout << "error:   a11 = " <<       a11 << "\n"; } catch (exception &e) { std::cout << "success: a11\n"; }
 
 	std::cout << std::endl;
 }
@@ -787,44 +787,435 @@ void cast13 (void)
 
 
 /**
+ * convert01 - empty
+ */
+void convert01 (void)
+{
+	Variant str =  "message";
+	Variant d   =  3.141592654;
+	Variant b   =  true;
+	Variant u8  =  42;
+	Variant s8  = -42;
+	Variant u16 =  1042;
+	Variant s16 = -1042;
+	Variant u32 =  1000042;
+	Variant s32 = -1000042;
+	Variant u64 =  1000000000042;
+	Variant s64 = -1000000000042;
+
+	{ Variant dst; dst = str; }
+	{ Variant dst; dst = d;   }
+	{ Variant dst; dst = b;   }
+	{ Variant dst; dst = u8;  }
+	{ Variant dst; dst = s8;  }
+	{ Variant dst; dst = u16; }
+	{ Variant dst; dst = s16; }
+	{ Variant dst; dst = u32; }
+	{ Variant dst; dst = s32; }
+	{ Variant dst; dst = u64; }
+	{ Variant dst; dst = s64; }
+}
+
+/**
+ * convert02 - string
+ */
+void convert02 (void)
+{
+	Variant str =  "message";
+	Variant d   =  3.141592654;
+	Variant b   =  true;
+	Variant u8  =  42;
+	Variant s8  = -42;
+	Variant u16 =  1042;
+	Variant s16 = -1042;
+	Variant u32 =  1000042;
+	Variant s32 = -1000042;
+	Variant u64 =  1000000000042;
+	Variant s64 = -1000000000042;
+
+	{ Variant dst (std::string ("hello")); dst = str; }
+	{ Variant dst (std::string ("hello")); dst = d;   }
+	{ Variant dst (std::string ("hello")); dst = b;   }
+	{ Variant dst (std::string ("hello")); dst = u8;  }
+	{ Variant dst (std::string ("hello")); dst = s8;  }
+	{ Variant dst (std::string ("hello")); dst = u16; }
+	{ Variant dst (std::string ("hello")); dst = s16; }
+	{ Variant dst (std::string ("hello")); dst = u32; }
+	{ Variant dst (std::string ("hello")); dst = s32; }
+	{ Variant dst (std::string ("hello")); dst = u64; }
+	{ Variant dst (std::string ("hello")); dst = s64; }
+}
+
+/**
+ * convert03 - string
+ */
+void convert03 (void)
+{
+	Variant str =  "message";
+	Variant d   =  3.141592654;
+	Variant b   =  true;
+	Variant u8  =  42;
+	Variant s8  = -42;
+	Variant u16 =  1042;
+	Variant s16 = -1042;
+	Variant u32 =  1000042;
+	Variant s32 = -1000042;
+	Variant u64 =  1000000000042;
+	Variant s64 = -1000000000042;
+
+	{ Variant dst ("hello"); dst = str; }
+	{ Variant dst ("hello"); dst = d;   }
+	{ Variant dst ("hello"); dst = b;   }
+	{ Variant dst ("hello"); dst = u8;  }
+	{ Variant dst ("hello"); dst = s8;  }
+	{ Variant dst ("hello"); dst = u16; }
+	{ Variant dst ("hello"); dst = s16; }
+	{ Variant dst ("hello"); dst = u32; }
+	{ Variant dst ("hello"); dst = s32; }
+	{ Variant dst ("hello"); dst = u64; }
+	{ Variant dst ("hello"); dst = s64; }
+}
+
+/**
+ * convert04 - double
+ */
+void convert04 (void)
+{
+	Variant str =  "message";
+	Variant d   =  3.141592654;
+	Variant b   =  true;
+	Variant u8  =  42;
+	Variant s8  = -42;
+	Variant u16 =  1042;
+	Variant s16 = -1042;
+	Variant u32 =  1000042;
+	Variant s32 = -1000042;
+	Variant u64 =  1000000000042;
+	Variant s64 = -1000000000042;
+
+	{ Variant dst (102.6); dst = str; }
+	{ Variant dst (102.6); dst = d;   }
+	{ Variant dst (102.6); dst = b;   }
+	{ Variant dst (102.6); dst = u8;  }
+	{ Variant dst (102.6); dst = s8;  }
+	{ Variant dst (102.6); dst = u16; }
+	{ Variant dst (102.6); dst = s16; }
+	{ Variant dst (102.6); dst = u32; }
+	{ Variant dst (102.6); dst = s32; }
+	{ Variant dst (102.6); dst = u64; }
+	{ Variant dst (102.6); dst = s64; }
+}
+
+/**
+ * convert05 - bool
+ */
+void convert05 (void)
+{
+	Variant str =  "message";
+	Variant d   =  3.141592654;
+	Variant b   =  false;
+	Variant u8  =  42;
+	Variant s8  = -42;
+	Variant u16 =  1042;
+	Variant s16 = -1042;
+	Variant u32 =  1000042;
+	Variant s32 = -1000042;
+	Variant u64 =  1000000000042;
+	Variant s64 = -1000000000042;
+
+	{ Variant dst (true); dst = str; }
+	{ Variant dst (true); dst = d;   }
+	{ Variant dst (true); dst = b;   }
+	{ Variant dst (true); dst = u8;  }
+	{ Variant dst (true); dst = s8;  }
+	{ Variant dst (true); dst = u16; }
+	{ Variant dst (true); dst = s16; }
+	{ Variant dst (true); dst = u32; }
+	{ Variant dst (true); dst = s32; }
+	{ Variant dst (true); dst = u64; }
+	{ Variant dst (true); dst = s64; }
+}
+
+/**
+ * convert06 - uint8_t
+ */
+void convert06 (void)
+{
+	Variant str =  "message";
+	Variant d   =  3.141592654;
+	Variant b   =  true;
+	Variant u8  =  42;
+	Variant s8  = -42;
+	Variant u16 =  1042;
+	Variant s16 = -1042;
+	Variant u32 =  1000042;
+	Variant s32 = -1000042;
+	Variant u64 =  1000000000042;
+	Variant s64 = -1000000000042;
+
+	{ Variant dst ((uint8_t) 98); dst = str; }
+	{ Variant dst ((uint8_t) 98); dst = d;   }
+	{ Variant dst ((uint8_t) 98); dst = b;   }
+	{ Variant dst ((uint8_t) 98); dst = u8;  }
+	{ Variant dst ((uint8_t) 98); dst = s8;  }
+	{ Variant dst ((uint8_t) 98); dst = u16; }
+	{ Variant dst ((uint8_t) 98); dst = s16; }
+	{ Variant dst ((uint8_t) 98); dst = u32; }
+	{ Variant dst ((uint8_t) 98); dst = s32; }
+	{ Variant dst ((uint8_t) 98); dst = u64; }
+	{ Variant dst ((uint8_t) 98); dst = s64; }
+}
+
+/**
+ * convert07 - int8_t
+ */
+void convert07 (void)
+{
+	Variant str =  "message";
+	Variant d   =  3.141592654;
+	Variant b   =  true;
+	Variant u8  =  42;
+	Variant s8  = -42;
+	Variant u16 =  1042;
+	Variant s16 = -1042;
+	Variant u32 =  1000042;
+	Variant s32 = -1000042;
+	Variant u64 =  1000000000042;
+	Variant s64 = -1000000000042;
+
+	{ Variant dst ((int8_t) -98); dst = str; }
+	{ Variant dst ((int8_t) -98); dst = d;   }
+	{ Variant dst ((int8_t) -98); dst = b;   }
+	{ Variant dst ((int8_t) -98); dst = u8;  }
+	{ Variant dst ((int8_t) -98); dst = s8;  }
+	{ Variant dst ((int8_t) -98); dst = u16; }
+	{ Variant dst ((int8_t) -98); dst = s16; }
+	{ Variant dst ((int8_t) -98); dst = u32; }
+	{ Variant dst ((int8_t) -98); dst = s32; }
+	{ Variant dst ((int8_t) -98); dst = u64; }
+	{ Variant dst ((int8_t) -98); dst = s64; }
+}
+
+
+/**
+ * convert08 - uint16_t
+ */
+void convert08 (void)
+{
+	Variant str =  "message";
+	Variant d   =  3.141592654;
+	Variant b   =  true;
+	Variant u8  =  42;
+	Variant s8  = -42;
+	Variant u16 =  1042;
+	Variant s16 = -1042;
+	Variant u32 =  1000042;
+	Variant s32 = -1000042;
+	Variant u64 =  1000000000042;
+	Variant s64 = -1000000000042;
+
+	{ Variant dst ((uint16_t) 1098); dst = str; }
+	{ Variant dst ((uint16_t) 1098); dst = d;   }
+	{ Variant dst ((uint16_t) 1098); dst = b;   }
+	{ Variant dst ((uint16_t) 1098); dst = u8;  }
+	{ Variant dst ((uint16_t) 1098); dst = s8;  }
+	{ Variant dst ((uint16_t) 1098); dst = u16; }
+	{ Variant dst ((uint16_t) 1098); dst = s16; }
+	{ Variant dst ((uint16_t) 1098); dst = u32; }
+	{ Variant dst ((uint16_t) 1098); dst = s32; }
+	{ Variant dst ((uint16_t) 1098); dst = u64; }
+	{ Variant dst ((uint16_t) 1098); dst = s64; }
+}
+
+/**
+ * convert09 - int16_t
+ */
+void convert09 (void)
+{
+	Variant str =  "message";
+	Variant d   =  3.141592654;
+	Variant b   =  true;
+	Variant u8  =  42;
+	Variant s8  = -42;
+	Variant u16 =  1042;
+	Variant s16 = -1042;
+	Variant u32 =  1000042;
+	Variant s32 = -1000042;
+	Variant u64 =  1000000000042;
+	Variant s64 = -1000000000042;
+
+	{ Variant dst ((int16_t) -1098); dst = str; }
+	{ Variant dst ((int16_t) -1098); dst = d;   }
+	{ Variant dst ((int16_t) -1098); dst = b;   }
+	{ Variant dst ((int16_t) -1098); dst = u8;  }
+	{ Variant dst ((int16_t) -1098); dst = s8;  }
+	{ Variant dst ((int16_t) -1098); dst = u16; }
+	{ Variant dst ((int16_t) -1098); dst = s16; }
+	{ Variant dst ((int16_t) -1098); dst = u32; }
+	{ Variant dst ((int16_t) -1098); dst = s32; }
+	{ Variant dst ((int16_t) -1098); dst = u64; }
+	{ Variant dst ((int16_t) -1098); dst = s64; }
+}
+
+
+/**
+ * convert10 - uint32_t
+ */
+void convert10 (void)
+{
+	Variant str =  "message";
+	Variant d   =  3.141592654;
+	Variant b   =  true;
+	Variant u8  =  42;
+	Variant s8  = -42;
+	Variant u16 =  1042;
+	Variant s16 = -1042;
+	Variant u32 =  1000042;
+	Variant s32 = -1000042;
+	Variant u64 =  1000000000042;
+	Variant s64 = -1000000000042;
+
+	{ Variant dst ((uint32_t) 1000098); dst = str; }
+	{ Variant dst ((uint32_t) 1000098); dst = d;   }
+	{ Variant dst ((uint32_t) 1000098); dst = b;   }
+	{ Variant dst ((uint32_t) 1000098); dst = u8;  }
+	{ Variant dst ((uint32_t) 1000098); dst = s8;  }
+	{ Variant dst ((uint32_t) 1000098); dst = u16; }
+	{ Variant dst ((uint32_t) 1000098); dst = s16; }
+	{ Variant dst ((uint32_t) 1000098); dst = u32; }
+	{ Variant dst ((uint32_t) 1000098); dst = s32; }
+	{ Variant dst ((uint32_t) 1000098); dst = u64; }
+	{ Variant dst ((uint32_t) 1000098); dst = s64; }
+}
+
+/**
+ * convert11 - int32_t
+ */
+void convert11 (void)
+{
+	Variant str =  "message";
+	Variant d   =  3.141592654;
+	Variant b   =  true;
+	Variant u8  =  42;
+	Variant s8  = -42;
+	Variant u16 =  1042;
+	Variant s16 = -1042;
+	Variant u32 =  1000042;
+	Variant s32 = -1000042;
+	Variant u64 =  1000000000042;
+	Variant s64 = -1000000000042;
+
+	{ Variant dst ((int32_t) -1000098); dst = str; }
+	{ Variant dst ((int32_t) -1000098); dst = d;   }
+	{ Variant dst ((int32_t) -1000098); dst = b;   }
+	{ Variant dst ((int32_t) -1000098); dst = u8;  }
+	{ Variant dst ((int32_t) -1000098); dst = s8;  }
+	{ Variant dst ((int32_t) -1000098); dst = u16; }
+	{ Variant dst ((int32_t) -1000098); dst = s16; }
+	{ Variant dst ((int32_t) -1000098); dst = u32; }
+	{ Variant dst ((int32_t) -1000098); dst = s32; }
+	{ Variant dst ((int32_t) -1000098); dst = u64; }
+	{ Variant dst ((int32_t) -1000098); dst = s64; }
+}
+
+
+/**
+ * convert12 - uint64_t
+ */
+void convert12 (void)
+{
+	Variant str =  "message";
+	Variant d   =  3.141592654;
+	Variant b   =  true;
+	Variant u8  =  42;
+	Variant s8  = -42;
+	Variant u16 =  1042;
+	Variant s16 = -1042;
+	Variant u32 =  1000042;
+	Variant s32 = -1000042;
+	Variant u64 =  1000000000042;
+	Variant s64 = -1000000000042;
+
+	{ Variant dst ((uint64_t) 1000000000098); dst = str; }
+	{ Variant dst ((uint64_t) 1000000000098); dst = d;   }
+	{ Variant dst ((uint64_t) 1000000000098); dst = b;   }
+	{ Variant dst ((uint64_t) 1000000000098); dst = u8;  }
+	{ Variant dst ((uint64_t) 1000000000098); dst = s8;  }
+	{ Variant dst ((uint64_t) 1000000000098); dst = u16; }
+	{ Variant dst ((uint64_t) 1000000000098); dst = s16; }
+	{ Variant dst ((uint64_t) 1000000000098); dst = u32; }
+	{ Variant dst ((uint64_t) 1000000000098); dst = s32; }
+	{ Variant dst ((uint64_t) 1000000000098); dst = u64; }
+	{ Variant dst ((uint64_t) 1000000000098); dst = s64; }
+}
+
+/**
+ * convert13 - int64_t
+ */
+void convert13 (void)
+{
+	Variant str =  "message";
+	Variant d   =  3.141592654;
+	Variant b   =  true;
+	Variant u8  =  42;
+	Variant s8  = -42;
+	Variant u16 =  1042;
+	Variant s16 = -1042;
+	Variant u32 =  1000042;
+	Variant s32 = -1000042;
+	Variant u64 =  1000000000042;
+	Variant s64 = -1000000000042;
+
+	{ Variant dst ((int64_t) -1000000000098); dst = str; }
+	{ Variant dst ((int64_t) -1000000000098); dst = d;   }
+	{ Variant dst ((int64_t) -1000000000098); dst = b;   }
+	{ Variant dst ((int64_t) -1000000000098); dst = u8;  }
+	{ Variant dst ((int64_t) -1000000000098); dst = s8;  }
+	{ Variant dst ((int64_t) -1000000000098); dst = u16; }
+	{ Variant dst ((int64_t) -1000000000098); dst = s16; }
+	{ Variant dst ((int64_t) -1000000000098); dst = u32; }
+	{ Variant dst ((int64_t) -1000000000098); dst = s32; }
+	{ Variant dst ((int64_t) -1000000000098); dst = u64; }
+	{ Variant dst ((int64_t) -1000000000098); dst = s64; }
+}
+
+
+/**
  * main
  */
 int main (int argc, char *argv[])
 {
-	//test1();
-
 	if (argc < 2) {
-		cast01();
-		cast02();
-		cast03();
-		cast04();
-		cast05();
-		cast06();
-		cast07();
-		cast08();
-		cast09();
-		cast10();
-		cast11();
-		cast12();
-		cast13();
+		convert01();
+		convert02();
+		convert03();
+		convert04();
+		convert05();
+		convert06();
+		convert07();
+		convert08();
+		convert09();
+		convert10();
+		convert11();
+		convert12();
+		convert13();
 	} else {
 		switch (std::stoi(argv[1])) {
-			case  1: cast01(); break;
-			case  2: cast02(); break;
-			case  3: cast03(); break;
-			case  4: cast04(); break;
-			case  5: cast05(); break;
-			case  6: cast06(); break;
-			case  7: cast07(); break;
-			case  8: cast08(); break;
-			case  9: cast09(); break;
-			case 10: cast10(); break;
-			case 11: cast11(); break;
-			case 12: cast12(); break;
-			case 13: cast13(); break;
+			case  1: convert01(); break;
+			case  2: convert02(); break;
+			case  3: convert03(); break;
+			case  4: convert04(); break;
+			case  5: convert05(); break;
+			case  6: convert06(); break;
+			case  7: convert07(); break;
+			case  8: convert08(); break;
+			case  9: convert09(); break;
+			case 10: convert10(); break;
+			case 11: convert11(); break;
+			case 12: convert12(); break;
+			case 13: convert13(); break;
 		}
 	}
-
 	return 0;
 }
 
