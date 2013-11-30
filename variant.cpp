@@ -17,6 +17,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <cstdint>
 
 #include "variant.h"
 
@@ -63,7 +64,7 @@ Variant::Variant (const char *value) :
 Variant::Variant (double value)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type   = Tag::t_double;
+	type     = Tag::t_double;
 	u_double = value;
 }
 
@@ -78,83 +79,83 @@ Variant::Variant (bool value)
 }
 
 /**
- * Variant (unsigned byte)
+ * Variant (uint8_t)
  */
-Variant::Variant (unsigned char value)
+Variant::Variant (uint8_t value)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type   = Tag::t_ubyte;
-	u_ubyte = value;
+	type = Tag::t_u8;
+	u_u8 = value;
 }
 
 /**
- * Variant (signed byte)
+ * Variant (int8_t)
  */
-Variant::Variant (signed char value)
+Variant::Variant (int8_t value)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type   = Tag::t_sbyte;
-	u_sbyte = value;
+	type = Tag::t_s8;
+	u_s8 = value;
 }
 
 /**
- * Variant (unsigned short)
+ * Variant (uint16_t)
  */
-Variant::Variant (unsigned short value)
+Variant::Variant (uint16_t value)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type    = Tag::t_ushort;
-	u_ushort = value;
+	type  = Tag::t_u16;
+	u_u16 = value;
 }
 
 /**
- * Variant (signed short)
+ * Variant (int16_t)
  */
-Variant::Variant (signed short value)
+Variant::Variant (int16_t value)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type    = Tag::t_sshort;
-	u_sshort = value;
+	type  = Tag::t_s16;
+	u_s16 = value;
 }
 
 /**
- * Variant (unsigned int)
+ * Variant (uint32_t)
  */
-Variant::Variant (unsigned int value)
+Variant::Variant (uint32_t value)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type  = Tag::t_uint;
-	u_uint = value;
+	type  = Tag::t_u32;
+	u_u32 = value;
 }
 
 /**
- * Variant (signed int)
+ * Variant (int32_t)
  */
-Variant::Variant (signed int value)
+Variant::Variant (int32_t value)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type  = Tag::t_sint;
-	u_sint = value;
+	type  = Tag::t_s32;
+	u_s32 = value;
 }
 
 /**
- * Variant (unsigned long)
+ * Variant (uint64_t)
  */
-Variant::Variant (unsigned long value)
+Variant::Variant (uint64_t value)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type   = Tag::t_ulong;
-	u_ulong = value;
+	type  = Tag::t_u64;
+	u_u64 = value;
 }
 
 /**
- * Variant (signed long)
+ * Variant (int64_t)
  */
-Variant::Variant (signed long value)
+Variant::Variant (int64_t value)
 {
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type   = Tag::t_slong;
-	u_slong = value;
+	type  = Tag::t_s64;
+	u_s64 = value;
 }
 
 
@@ -164,21 +165,20 @@ Variant::Variant (signed long value)
 Variant::Variant (const Variant &v)
 {
 	type = v.type;
-	//std::cout << "copy constructor " << this << "\n";
 	std::cout << "copy constructor\n";
 	switch (type) {
 		case Variant::Tag::t_unset:                        break;
 		case Variant::Tag::t_string: Variant (v.u_string); break;
 		case Variant::Tag::t_double: Variant (v.u_double); break;
 		case Variant::Tag::t_bool:   Variant (v.u_bool);   break;
-		case Variant::Tag::t_ubyte:  Variant (v.u_ubyte);  break;
-		case Variant::Tag::t_sbyte:  Variant (v.u_sbyte);  break;
-		case Variant::Tag::t_ushort: Variant (v.u_ushort); break;
-		case Variant::Tag::t_sshort: Variant (v.u_sshort); break;
-		case Variant::Tag::t_uint:   Variant (v.u_uint);   break;
-		case Variant::Tag::t_sint:   Variant (v.u_sint);   break;
-		case Variant::Tag::t_ulong:  Variant (v.u_ulong);  break;
-		case Variant::Tag::t_slong:  Variant (v.u_slong);  break;
+		case Variant::Tag::t_u8:     Variant (v.u_u8);     break;
+		case Variant::Tag::t_s8:     Variant (v.u_s8);     break;
+		case Variant::Tag::t_u16:    Variant (v.u_u16);    break;
+		case Variant::Tag::t_s16:    Variant (v.u_s16);    break;
+		case Variant::Tag::t_u32:    Variant (v.u_u32);    break;
+		case Variant::Tag::t_s32:    Variant (v.u_s32);    break;
+		case Variant::Tag::t_u64:    Variant (v.u_u64);    break;
+		case Variant::Tag::t_s64:    Variant (v.u_s64);    break;
 	}
 }
 
@@ -205,14 +205,14 @@ Variant::operator= (const Variant &v)
 		case Variant::Tag::t_string: Variant (v.u_string); break;
 		case Variant::Tag::t_double: Variant (v.u_double); break;
 		case Variant::Tag::t_bool:   Variant (v.u_bool);   break;
-		case Variant::Tag::t_ubyte:  Variant (v.u_ubyte);  break;
-		case Variant::Tag::t_sbyte:  Variant (v.u_sbyte);  break;
-		case Variant::Tag::t_ushort: Variant (v.u_ushort); break;
-		case Variant::Tag::t_sshort: Variant (v.u_sshort); break;
-		case Variant::Tag::t_uint:   Variant (v.u_uint);   break;
-		case Variant::Tag::t_sint:   Variant (v.u_sint);   break;
-		case Variant::Tag::t_ulong:  Variant (v.u_ulong);  break;
-		case Variant::Tag::t_slong:  Variant (v.u_slong);  break;
+		case Variant::Tag::t_u8:     Variant (v.u_u8);     break;
+		case Variant::Tag::t_s8:     Variant (v.u_s8);     break;
+		case Variant::Tag::t_u16:    Variant (v.u_u16);    break;
+		case Variant::Tag::t_s16:    Variant (v.u_s16);    break;
+		case Variant::Tag::t_u32:    Variant (v.u_u32);    break;
+		case Variant::Tag::t_s32:    Variant (v.u_s32);    break;
+		case Variant::Tag::t_u64:    Variant (v.u_u64);    break;
+		case Variant::Tag::t_s64:    Variant (v.u_s64);    break;
 	}
 
 	return *this;
@@ -231,14 +231,14 @@ Variant::operator= (Variant &&v)
 		case Variant::Tag::t_string: Variant (v.u_string); break;
 		case Variant::Tag::t_double: Variant (v.u_double); break;
 		case Variant::Tag::t_bool:   Variant (v.u_bool);   break;
-		case Variant::Tag::t_ubyte:  Variant (v.u_ubyte);  break;
-		case Variant::Tag::t_sbyte:  Variant (v.u_sbyte);  break;
-		case Variant::Tag::t_ushort: Variant (v.u_ushort); break;
-		case Variant::Tag::t_sshort: Variant (v.u_sshort); break;
-		case Variant::Tag::t_uint:   Variant (v.u_uint);   break;
-		case Variant::Tag::t_sint:   Variant (v.u_sint);   break;
-		case Variant::Tag::t_ulong:  Variant (v.u_ulong);  break;
-		case Variant::Tag::t_slong:  Variant (v.u_slong);  break;
+		case Variant::Tag::t_u8:     Variant (v.u_u8);     break;
+		case Variant::Tag::t_s8:     Variant (v.u_s8);     break;
+		case Variant::Tag::t_u16:    Variant (v.u_u16);    break;
+		case Variant::Tag::t_s16:    Variant (v.u_s16);    break;
+		case Variant::Tag::t_u32:    Variant (v.u_u32);    break;
+		case Variant::Tag::t_s32:    Variant (v.u_s32);    break;
+		case Variant::Tag::t_u64:    Variant (v.u_u64);    break;
+		case Variant::Tag::t_s64:    Variant (v.u_s64);    break;
 	}
 
 	return *this;
@@ -275,18 +275,18 @@ operator<< (std::ostream &os, const Variant &v)
 {
 	os << "Variant: [";
 	switch (v.type) {
-		case Variant::Tag::t_unset:  os << "unset";                 break;
-		case Variant::Tag::t_string: os << "string," << v.u_string; break;
-		case Variant::Tag::t_double: os << "double," << v.u_double; break;
-		case Variant::Tag::t_bool:   os << "bool,"   << v.u_bool;   break;
-		case Variant::Tag::t_ubyte:  os << "ubyte,"  << v.u_ubyte;  break;
-		case Variant::Tag::t_sbyte:  os << "sbyte,"  << v.u_sbyte;  break;
-		case Variant::Tag::t_ushort: os << "ushort," << v.u_ushort; break;
-		case Variant::Tag::t_sshort: os << "sshort," << v.u_sshort; break;
-		case Variant::Tag::t_uint:   os << "uint,"   << v.u_uint;   break;
-		case Variant::Tag::t_sint:   os << "sint,"   << v.u_sint;   break;
-		case Variant::Tag::t_ulong:  os << "ulong,"  << v.u_ulong;  break;
-		case Variant::Tag::t_slong:  os << "slong,"  << v.u_slong;  break;
+		case Variant::Tag::t_unset:  os << "unset";                       break;
+		case Variant::Tag::t_string: os << "string," <<       v.u_string; break;
+		case Variant::Tag::t_double: os << "double," <<       v.u_double; break;
+		case Variant::Tag::t_bool:   os << "bool,"   <<       v.u_bool;   break;
+		case Variant::Tag::t_u8:     os << "uint8,"  << (int) v.u_u8;     break;
+		case Variant::Tag::t_s8:     os << "int8,"   << (int) v.u_s8;     break;
+		case Variant::Tag::t_u16:    os << "uint16," <<       v.u_u16;    break;
+		case Variant::Tag::t_s16:    os << "int16,"  <<       v.u_s16;    break;
+		case Variant::Tag::t_u32:    os << "uint32," <<       v.u_u32;    break;
+		case Variant::Tag::t_s32:    os << "int32,"  <<       v.u_s32;    break;
+		case Variant::Tag::t_u64:    os << "uint64," <<       v.u_u64;    break;
+		case Variant::Tag::t_s64:    os << "int64,"  <<       v.u_s64;    break;
 	}
 	os << "]";
 
@@ -315,16 +315,16 @@ Variant::operator std::string()
 	switch (type) {
 		case Variant::Tag::t_string: return u_string;			// Match
 
-		case Variant::Tag::t_double: return std::to_string (u_double);	// Promotions
+		case Variant::Tag::t_double: return std::to_string (u_double);	// Promotion
 		case Variant::Tag::t_bool:   return std::to_string (u_bool);
-		case Variant::Tag::t_ubyte:  return std::to_string (u_ubyte);
-		case Variant::Tag::t_sbyte:  return std::to_string (u_sbyte);
-		case Variant::Tag::t_ushort: return std::to_string (u_ushort);
-		case Variant::Tag::t_sshort: return std::to_string (u_sshort);
-		case Variant::Tag::t_uint:   return std::to_string (u_uint);
-		case Variant::Tag::t_sint:   return std::to_string (u_sint);
-		case Variant::Tag::t_ulong:  return std::to_string (u_ulong);
-		case Variant::Tag::t_slong:  return std::to_string (u_slong);
+		case Variant::Tag::t_u8:     return std::to_string (u_u8);
+		case Variant::Tag::t_s8:     return std::to_string (u_s8);
+		case Variant::Tag::t_u16:    return std::to_string (u_u16);
+		case Variant::Tag::t_s16:    return std::to_string (u_s16);
+		case Variant::Tag::t_u32:    return std::to_string (u_u32);
+		case Variant::Tag::t_s32:    return std::to_string (u_s32);
+		case Variant::Tag::t_u64:    return std::to_string (u_u64);
+		case Variant::Tag::t_s64:    return std::to_string (u_s64);
 
 		case Variant::Tag::t_unset:					// Failure
 		default:
@@ -355,89 +355,89 @@ Variant::operator bool()
 }
 
 /**
- * cast (unsigned char)
+ * cast (uint8_t)
  */
-Variant::operator unsigned char()
+Variant::operator uint8_t()
 {
-	if (type == Variant::Tag::t_ubyte)
-		return u_ubyte;
+	if (type == Variant::Tag::t_u8)
+		return u_u8;
 	else
 		throw std::runtime_error ("variant bad cast");
 }
 
 /**
- * cast (signed char)
+ * cast (int8_t)
  */
-Variant::operator signed char()
+Variant::operator int8_t()
 {
-	if (type == Variant::Tag::t_sbyte)
-		return u_sbyte;
+	if (type == Variant::Tag::t_s8)
+		return u_s8;
 	else
 		throw std::runtime_error ("variant bad cast");
 }
 
 /**
- * cast (unsigned short)
+ * cast (uint16_t)
  */
-Variant::operator unsigned short()
+Variant::operator uint16_t()
 {
-	if (type == Variant::Tag::t_ushort)
-		return u_ushort;
+	if (type == Variant::Tag::t_u16)
+		return u_u16;
 	else
 		throw std::runtime_error ("variant bad cast");
 }
 
 /**
- * cast (signed short)
+ * cast (int16_t)
  */
-Variant::operator signed short()
+Variant::operator int16_t()
 {
-	if (type == Variant::Tag::t_sshort)
-		return u_sshort;
+	if (type == Variant::Tag::t_s16)
+		return u_s16;
 	else
 		throw std::runtime_error ("variant bad cast");
 }
 
 /**
- * cast (unsigned int)
+ * cast (uint32_t)
  */
-Variant::operator unsigned int()
+Variant::operator uint32_t()
 {
-	if (type == Variant::Tag::t_uint)
-		return u_uint;
+	if (type == Variant::Tag::t_u32)
+		return u_u32;
 	else
 		throw std::runtime_error ("variant bad cast");
 }
 
 /**
- * cast (signed int)
+ * cast (int32_t)
  */
-Variant::operator signed int()
+Variant::operator int32_t()
 {
-	if (type == Variant::Tag::t_sint)
-		return u_sint;
+	if (type == Variant::Tag::t_s32)
+		return u_s32;
 	else
 		throw std::runtime_error ("variant bad cast");
 }
 
 /**
- * cast (unsigned long)
+ * cast (uint64_t)
  */
-Variant::operator unsigned long()
+Variant::operator uint64_t()
 {
-	if (type == Variant::Tag::t_ulong)
-		return u_ulong;
+	if (type == Variant::Tag::t_u64)
+		return u_u64;
 	else
 		throw std::runtime_error ("variant bad cast");
 }
 
 /**
- * cast (signed long)
+ * cast (int64_t)
  */
-Variant::operator signed long()
+Variant::operator int64_t()
 {
-	if (type == Variant::Tag::t_slong)
-		return u_slong;
+	if (type == Variant::Tag::t_s64)
+		return u_s64;
 	else
 		throw std::runtime_error ("variant bad cast");
 }

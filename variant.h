@@ -20,18 +20,7 @@
 
 #include <string>
 #include <iostream>
-
-/* list of coercions
- *	unset	-> none
- *	string	-> string
- *	char	-> char, string
- *	bool	-> string, bool, byte, short, int, long
- *	byte	-> string, byte, short, int, long
- *	short	-> string, short, int, long
- *	int	-> string, int, long
- *	long	-> string, long
- */
-
+#include <cstdint>
 
 /**
  * class Variant
@@ -44,16 +33,16 @@ public:
 
 	Variant (const std::string &value);	// typed constructors
 	Variant (const char *value);
-	Variant (double value);
-	Variant (bool value);
-	Variant (unsigned char  value);
-	Variant (  signed char  value);
-	Variant (unsigned short value);
-	Variant (  signed short value);
-	Variant (unsigned int   value);
-	Variant (  signed int   value);
-	Variant (unsigned long  value);
-	Variant (  signed long  value);
+	Variant (double   value);
+	Variant (bool     value);
+	Variant (uint8_t  value);
+	Variant ( int8_t  value);
+	Variant (uint16_t value);
+	Variant ( int16_t value);
+	Variant (uint32_t value);
+	Variant ( int32_t value);
+	Variant (uint64_t value);
+	Variant ( int64_t value);
 
 	Variant (const Variant &v);		// copy constructor
 	Variant (Variant &&v);			// move constructor
@@ -61,17 +50,32 @@ public:
 	Variant & operator= (const Variant &v);	// copy assignment
 	Variant & operator= (Variant &&v);	// move assignment
 
-	operator std::string();
+	operator std::string();			// cast Variant to type
 	operator double();
 	operator bool();
-	operator unsigned char();
-	operator   signed char();
-	operator unsigned short();
-	operator   signed short();
-	operator unsigned int();
-	operator   signed int();
-	operator unsigned long();
-	operator   signed long();
+	operator uint8_t();
+	operator  int8_t();
+	operator uint16_t();
+	operator  int16_t();
+	operator uint32_t();
+	operator  int32_t();
+	operator uint64_t();
+	operator  int64_t();
+
+	enum class Tag {
+		t_unset,	// Empty
+		t_string,	// Text
+		t_double,	// Floating point
+		t_bool,		//  1 bit
+		t_u8,		//  8 bits unsigned integer
+		t_s8,		//         signed
+		t_u16,		// 16 bits unsigned integer
+		t_s16,		//         signed
+		t_u32,		// 32 bits unsigned integer
+		t_s32,		//         signed
+		t_u64,		// 64 bits unsigned integer
+		t_s64		//         signed
+	} type;
 
 protected:
 	friend void swap (Variant &first, Variant &second);
@@ -80,33 +84,18 @@ protected:
 
 	void clear (void);
 
-	enum class Tag {
-		t_unset,	// Empty
-		t_string,	// Text
-		t_double,	// Floating point
-		t_bool,		//  1 bit
-		t_ubyte,	//  8 bits unsigned
-		t_sbyte,	//         signed
-		t_ushort,	// 16 bits unsigned
-		t_sshort,	//         signed
-		t_uint,		// 32 bits unsigned
-		t_sint,		//         signed
-		t_ulong,	// 64 bits unsigned
-		t_slong		//         signed
-	} type;
-
 	union {
 		std::string	u_string;
 		double		u_double;
 		bool		u_bool;
-		unsigned char	u_ubyte;
-		  signed char	u_sbyte;
-		unsigned short	u_ushort;
-		  signed short	u_sshort;
-		unsigned int	u_uint;
-		  signed int	u_sint;
-		unsigned long	u_ulong;
-		  signed long	u_slong;
+		uint8_t		u_u8;
+		 int8_t		u_s8;
+		uint16_t	u_u16;
+		 int16_t	u_s16;
+		uint32_t	u_u32;
+		 int32_t	u_s32;
+		uint64_t	u_u64;
+		 int64_t	u_s64;
 	};
 };
 
