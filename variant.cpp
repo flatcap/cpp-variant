@@ -24,10 +24,10 @@
 /**
  * Variant (default)
  */
-Variant::Variant (void)
+Variant::Variant (void) :
+	type (Tag::t_unset)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type = Tag::t_unset;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
 /**
@@ -35,7 +35,7 @@ Variant::Variant (void)
  */
 Variant::~Variant()
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	clear();
 }
 
@@ -43,10 +43,10 @@ Variant::~Variant()
 /**
  * Variant (string)
  */
-Variant::Variant (const std::string &value)
+Variant::Variant (const std::string &value) :
+	type (Tag::t_string)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type = Tag::t_string;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	new (&u_string) std::string(value);	// placement new
 }
 
@@ -61,110 +61,110 @@ Variant::Variant (const char *value) :
 /**
  * Variant (double)
  */
-Variant::Variant (double value)
+Variant::Variant (double value) :
+	type     (Tag::t_double),
+	u_double (value)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type     = Tag::t_double;
-	u_double = value;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
 /**
  * Variant (bool)
  */
-Variant::Variant (bool value)
+Variant::Variant (bool value) :
+	type   (Tag::t_bool),
+	u_bool (value)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type   = Tag::t_bool;
-	u_bool = value;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
 /**
  * Variant (uint8_t)
  */
-Variant::Variant (uint8_t value)
+Variant::Variant (uint8_t value) :
+	type (Tag::t_u8),
+	u_u8 (value)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type = Tag::t_u8;
-	u_u8 = value;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
 /**
  * Variant (int8_t)
  */
-Variant::Variant (int8_t value)
+Variant::Variant (int8_t value) :
+	type (Tag::t_s8),
+	u_s8 (value)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type = Tag::t_s8;
-	u_s8 = value;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
 /**
  * Variant (uint16_t)
  */
-Variant::Variant (uint16_t value)
+Variant::Variant (uint16_t value) :
+	type  (Tag::t_u16),
+	u_u16 (value)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type  = Tag::t_u16;
-	u_u16 = value;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
 /**
  * Variant (int16_t)
  */
-Variant::Variant (int16_t value)
+Variant::Variant (int16_t value) :
+	type  (Tag::t_s16),
+	u_s16 (value)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type  = Tag::t_s16;
-	u_s16 = value;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
 /**
  * Variant (uint32_t)
  */
-Variant::Variant (uint32_t value)
+Variant::Variant (uint32_t value) :
+	type  (Tag::t_u32),
+	u_u32 (value)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type  = Tag::t_u32;
-	u_u32 = value;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
 /**
  * Variant (int32_t)
  */
-Variant::Variant (int32_t value)
+Variant::Variant (int32_t value) :
+	type  (Tag::t_s32),
+	u_s32 (value)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type  = Tag::t_s32;
-	u_s32 = value;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
 /**
  * Variant (uint64_t)
  */
-Variant::Variant (uint64_t value)
+Variant::Variant (uint64_t value) :
+	type  (Tag::t_u64),
+	u_u64 (value)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type  = Tag::t_u64;
-	u_u64 = value;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
 /**
  * Variant (int64_t)
  */
-Variant::Variant (int64_t value)
+Variant::Variant (int64_t value) :
+	type  (Tag::t_s64),
+	u_s64 (value)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
-	type  = Tag::t_s64;
-	u_s64 = value;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 }
 
 
 /**
  * Variant (copy)
  */
-Variant::Variant (const Variant &v)
+Variant::Variant (const Variant &v) :
+	type (v.type)
 {
-	type = v.type;
 	std::cout << "copy constructor\n";
 	switch (type) {
 		case Variant::Tag::t_unset:                        break;
@@ -185,7 +185,8 @@ Variant::Variant (const Variant &v)
 /**
  * Variant (move)
  */
-Variant::Variant (Variant &&v)
+Variant::Variant (Variant &&v) :
+	type (Tag::t_unset)
 {
 	swap(*this, v);
 	std::cout << "move constructor\n";
@@ -198,7 +199,7 @@ Variant::Variant (Variant &&v)
 Variant &
 Variant::operator= (const Variant &v)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	clear();
 	switch (type) {
 		case Variant::Tag::t_unset:                        break;
@@ -224,7 +225,7 @@ Variant::operator= (const Variant &v)
 Variant &
 Variant::operator= (Variant &&v)
 {
-	//std::cout << __PRETTY_FUNCTION__ << std::endl;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	clear();
 	switch (type) {
 		case Variant::Tag::t_unset:                        break;

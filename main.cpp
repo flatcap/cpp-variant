@@ -996,7 +996,6 @@ void convert07 (void)
 	{ Variant dst ((int8_t) -98); dst = s64; }
 }
 
-
 /**
  * convert08 - uint16_t
  */
@@ -1057,7 +1056,6 @@ void convert09 (void)
 	{ Variant dst ((int16_t) -1098); dst = s64; }
 }
 
-
 /**
  * convert10 - uint32_t
  */
@@ -1117,7 +1115,6 @@ void convert11 (void)
 	{ Variant dst ((int32_t) -1000098); dst = u64; }
 	{ Variant dst ((int32_t) -1000098); dst = s64; }
 }
-
 
 /**
  * convert12 - uint64_t
@@ -1181,41 +1178,23 @@ void convert13 (void)
 
 
 /**
+ * ctor01 - default
+ */
+void ctor01 (void)
+{
+}
+
+
+/**
  * main
  */
 int main (int argc, char *argv[])
 {
-	if (argc < 2) {
-		convert01();
-		convert02();
-		convert03();
-		convert04();
-		convert05();
-		convert06();
-		convert07();
-		convert08();
-		convert09();
-		convert10();
-		convert11();
-		convert12();
-		convert13();
-	} else {
-		switch (std::stoi(argv[1])) {
-			case  1: convert01(); break;
-			case  2: convert02(); break;
-			case  3: convert03(); break;
-			case  4: convert04(); break;
-			case  5: convert05(); break;
-			case  6: convert06(); break;
-			case  7: convert07(); break;
-			case  8: convert08(); break;
-			case  9: convert09(); break;
-			case 10: convert10(); break;
-			case 11: convert11(); break;
-			case 12: convert12(); break;
-			case 13: convert13(); break;
-		}
-	}
+	Variant v1;
+	Variant v2 (42);
+	Variant v3 (v2);
+	Variant v4 (std::move(v1));
+
 	return 0;
 }
 
