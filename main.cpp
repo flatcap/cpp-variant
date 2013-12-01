@@ -20,111 +20,67 @@
 #include <cstdint>
 #include <limits>
 
-#include "variant.h"
-
-/**
- * retval
- */
-Variant retval (const Variant &v)
-{
-	std::cout << "\nmarkera\n" << std::endl;
-
-	Variant r = v;
-
-	std::cout << "\nmarkerb\n" << std::endl;
-
-	r = (long) 999;
-
-	std::cout << "\nmarkerc\n" << std::endl;
-
-	return r;
-}
+#include "basic.h"
 
 /**
  * main
  */
 int main (int, char *[])
 {
-#if 1
-	{
-		std::cout << "\nmarker1\n" << std::endl;
+	BasicVariant bv;
 
-		Variant v1 = "hello";
-		Variant v2 = "goodbye";
+	BasicVariant str = (std::string) "highest";
+	BasicVariant d   = (double)      std::numeric_limits<double>::max();
+	BasicVariant b   = (bool)        std::numeric_limits<bool>::max();
+	BasicVariant u8  = (uint8_t)     std::numeric_limits<uint8_t>::max();
+	BasicVariant s8  = (int8_t)      std::numeric_limits<int8_t>::max();
+	BasicVariant u16 = (uint16_t)    std::numeric_limits<uint16_t>::max();
+	BasicVariant s16 = (int16_t)     std::numeric_limits<int16_t>::max();
+	BasicVariant u32 = (uint32_t)    std::numeric_limits<uint32_t>::max();
+	BasicVariant s32 = (int32_t)     std::numeric_limits<int32_t>::max();
+	BasicVariant u64 = (uint64_t)    std::numeric_limits<uint64_t>::max();
+	BasicVariant s64 = (int64_t)     std::numeric_limits<int64_t>::max();
 
-		std::cout << "\nmarker2\n" << std::endl;
+	std::cout << std::endl;
 
-		std::cout << v1 << std::endl;
-		std::cout << v2 << std::endl;
+	std::cout << "str " << (std::string) str << std::endl;
+	std::cout << "d   " << (double)      d   << std::endl;
+	std::cout << "b   " << (bool)        b   << std::endl;
+	std::cout << "u8  " << (int)         u8  << std::endl;
+	std::cout << "s8  " << (int)         s8  << std::endl;
+	std::cout << "u16 " << (uint16_t)    u16 << std::endl;
+	std::cout << "s16 " << (int16_t)     s16 << std::endl;
+	std::cout << "u32 " << (uint32_t)    u32 << std::endl;
+	std::cout << "s32 " << (int32_t)     s32 << std::endl;
+	std::cout << "u64 " << (uint64_t)    u64 << std::endl;
+	std::cout << "s64 " << (int64_t)     s64 << std::endl;
 
-		std::cout << "\nmarker3\n" << std::endl;
+	str = (std::string) "lowest";
+	d   = (double)      std::numeric_limits<double>::min();
+	b   = (bool)        std::numeric_limits<bool>::min();
+	u8  = (uint8_t)     std::numeric_limits<uint8_t>::min();
+	s8  = (int8_t)      std::numeric_limits<int8_t>::min();
+	u16 = (uint16_t)    std::numeric_limits<uint16_t>::min();
+	s16 = (int16_t)     std::numeric_limits<int16_t>::min();
+	u32 = (uint32_t)    std::numeric_limits<uint32_t>::min();
+	s32 = (int32_t)     std::numeric_limits<int32_t>::min();
+	u64 = (uint64_t)    std::numeric_limits<uint64_t>::min();
+	s64 = (int64_t)     std::numeric_limits<int64_t>::min();
 
-		//std::swap (v1, v2);
+	std::cout << std::endl;
 
-		std::cout << "\nmarker4\n" << std::endl;
+	std::cout << "str " << (std::string) str << std::endl;
+	std::cout << "d   " << (double)      d   << std::endl;
+	std::cout << "b   " << (bool)        b   << std::endl;
+	std::cout << "u8  " << (int)         u8  << std::endl;
+	std::cout << "s8  " << (int)         s8  << std::endl;
+	std::cout << "u16 " << (uint16_t)    u16 << std::endl;
+	std::cout << "s16 " << (int16_t)     s16 << std::endl;
+	std::cout << "u32 " << (uint32_t)    u32 << std::endl;
+	std::cout << "s32 " << (int32_t)     s32 << std::endl;
+	std::cout << "u64 " << (uint64_t)    u64 << std::endl;
+	std::cout << "s64 " << (int64_t)     s64 << std::endl;
 
-		std::cout << v1 << std::endl;
-		std::cout << v2 << std::endl;
-
-		std::cout << "\nmarker5\n" << std::endl;
-
-	}
-#endif
-
-#if 0
-	{
-		std::cout << "\nmarker1\n" << std::endl;
-
-		Variant v1 = retval(Variant());
-
-		std::cout << "\nmarker2\n" << std::endl;
-
-		std::cout << v1 << std::endl;
-
-		std::cout << "\nmarker2\n" << std::endl;
-	}
-#endif
-
-#if 0
-	std::cout << "\nmarker1\n" << std::endl;
-
-	Variant v1 (42);
-
-	std::cout << "\nmarker2\n" << std::endl;
-
-	Variant v2 (std::move(v1));
-
-	std::cout << "\nmarker3\n" << std::endl;
-
-	Variant v3 = retval(v1);
-
-	std::cout << "\nmarker4\n" << std::endl;
-
-	std::cout << v1 << std::endl;
-	std::cout << v2 << std::endl;
-	std::cout << v3 << std::endl;
-#endif
-
-#if 0
-	std::cout << "\nmarker1\n" << std::endl;
-
-	Variant v1 = "hello";
-
-	std::cout << "\nmarker2\n" << std::endl;
-
-	Variant v2 = 42;
-
-	std::cout << "\nmarker3\n" << std::endl;
-
-	swap (v1, v2);
-
-	std::cout << "\nmarker4\n" << std::endl;
-
-	std::cout << v1 << std::endl;
-	std::cout << v2 << std::endl;
-#endif
-
-	return 0;
+	std::cout << std::endl;
 }
-
 
