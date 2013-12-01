@@ -35,7 +35,7 @@ Variant::Variant (void) :
  */
 Variant::~Variant()
 {
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	std::cout << __PRETTY_FUNCTION__ << " : " << this << std::endl;
 	clear();
 }
 
@@ -165,7 +165,7 @@ Variant::Variant (int64_t value) :
 Variant::Variant (const Variant &v) :
 	type (v.type)
 {
-	std::cout << "copy constructor\n";
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	switch (type) {
 		case Variant::Tag::t_unset:                        break;
 		case Variant::Tag::t_string: Variant (v.u_string); break;
@@ -188,8 +188,8 @@ Variant::Variant (const Variant &v) :
 Variant::Variant (Variant &&v) :
 	type (Tag::t_unset)
 {
-	swap(*this, v);
-	std::cout << "move constructor\n";
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
+	std::swap(*this, v);
 }
 
 
@@ -252,7 +252,9 @@ Variant::operator= (Variant &&v)
 void
 swap (Variant &first, Variant &second)
 {
-	std::cout << "swap " << first << " and " << second << "\n";
+	exit (1);
+	std::cout << __PRETTY_FUNCTION__ << " : " << first << " <-> " << second << std::endl;
+
 	std::swap (first.type, second.type);
 }
 
