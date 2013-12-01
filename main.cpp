@@ -23,37 +23,51 @@
 #include "basic.h"
 
 /**
- * main
+ * test_range
  */
-int main (int, char *[])
+void test_range (void)
 {
-	BasicVariant bv;
+	Variant bv;
 
-	BasicVariant str = (std::string) "highest";
-	BasicVariant d   = (double)      std::numeric_limits<double>::max();
-	BasicVariant b   = (bool)        std::numeric_limits<bool>::max();
-	BasicVariant u8  = (uint8_t)     std::numeric_limits<uint8_t>::max();
-	BasicVariant s8  = (int8_t)      std::numeric_limits<int8_t>::max();
-	BasicVariant u16 = (uint16_t)    std::numeric_limits<uint16_t>::max();
-	BasicVariant s16 = (int16_t)     std::numeric_limits<int16_t>::max();
-	BasicVariant u32 = (uint32_t)    std::numeric_limits<uint32_t>::max();
-	BasicVariant s32 = (int32_t)     std::numeric_limits<int32_t>::max();
-	BasicVariant u64 = (uint64_t)    std::numeric_limits<uint64_t>::max();
-	BasicVariant s64 = (int64_t)     std::numeric_limits<int64_t>::max();
+	Variant str = (std::string) "highest";
+	Variant d   = (double)      std::numeric_limits<double>::max();
+	Variant b   = (bool)        std::numeric_limits<bool>::max();
+	Variant u8  = (uint8_t)     std::numeric_limits<uint8_t>::max();
+	Variant s8  = (int8_t)      std::numeric_limits<int8_t>::max();
+	Variant u16 = (uint16_t)    std::numeric_limits<uint16_t>::max();
+	Variant s16 = (int16_t)     std::numeric_limits<int16_t>::max();
+	Variant u32 = (uint32_t)    std::numeric_limits<uint32_t>::max();
+	Variant s32 = (int32_t)     std::numeric_limits<int32_t>::max();
+	Variant u64 = (uint64_t)    std::numeric_limits<uint64_t>::max();
+	Variant s64 = (int64_t)     std::numeric_limits<int64_t>::max();
 
 	std::cout << std::endl;
 
 	std::cout << "str " << (std::string) str << std::endl;
 	std::cout << "d   " << (double)      d   << std::endl;
 	std::cout << "b   " << (bool)        b   << std::endl;
-	std::cout << "u8  " << (int)         u8  << std::endl;
-	std::cout << "s8  " << (int)         s8  << std::endl;
+	std::cout << "u8  " << (uint16_t)    u8  << std::endl;
+	std::cout << "s8  " << (int16_t)     s8  << std::endl;
 	std::cout << "u16 " << (uint16_t)    u16 << std::endl;
 	std::cout << "s16 " << (int16_t)     s16 << std::endl;
 	std::cout << "u32 " << (uint32_t)    u32 << std::endl;
 	std::cout << "s32 " << (int32_t)     s32 << std::endl;
 	std::cout << "u64 " << (uint64_t)    u64 << std::endl;
 	std::cout << "s64 " << (int64_t)     s64 << std::endl;
+
+	std::cout << std::endl;
+
+	std::cout << "str " << (std::string) str << std::endl;
+	std::cout << "d   " << (std::string) d   << std::endl;
+	std::cout << "b   " << (std::string) b   << std::endl;
+	std::cout << "u8  " << (std::string) u8  << std::endl;
+	std::cout << "s8  " << (std::string) s8  << std::endl;
+	std::cout << "u16 " << (std::string) u16 << std::endl;
+	std::cout << "s16 " << (std::string) s16 << std::endl;
+	std::cout << "u32 " << (std::string) u32 << std::endl;
+	std::cout << "s32 " << (std::string) s32 << std::endl;
+	std::cout << "u64 " << (std::string) u64 << std::endl;
+	std::cout << "s64 " << (std::string) s64 << std::endl;
 
 	str = (std::string) "lowest";
 	d   = (double)      std::numeric_limits<double>::min();
@@ -72,8 +86,8 @@ int main (int, char *[])
 	std::cout << "str " << (std::string) str << std::endl;
 	std::cout << "d   " << (double)      d   << std::endl;
 	std::cout << "b   " << (bool)        b   << std::endl;
-	std::cout << "u8  " << (int)         u8  << std::endl;
-	std::cout << "s8  " << (int)         s8  << std::endl;
+	std::cout << "u8  " << (uint16_t)    u8  << std::endl;
+	std::cout << "s8  " << (int16_t)     s8  << std::endl;
 	std::cout << "u16 " << (uint16_t)    u16 << std::endl;
 	std::cout << "s16 " << (int16_t)     s16 << std::endl;
 	std::cout << "u32 " << (uint32_t)    u32 << std::endl;
@@ -82,5 +96,54 @@ int main (int, char *[])
 	std::cout << "s64 " << (int64_t)     s64 << std::endl;
 
 	std::cout << std::endl;
+
+	std::cout << "str " << (std::string) str << std::endl;
+	std::cout << "d   " << (std::string) d   << std::endl;
+	std::cout << "b   " << (std::string) b   << std::endl;
+	std::cout << "u8  " << (std::string) u8  << std::endl;
+	std::cout << "s8  " << (std::string) s8  << std::endl;
+	std::cout << "u16 " << (std::string) u16 << std::endl;
+	std::cout << "s16 " << (std::string) s16 << std::endl;
+	std::cout << "u32 " << (std::string) u32 << std::endl;
+	std::cout << "s32 " << (std::string) s32 << std::endl;
+	std::cout << "u64 " << (std::string) u64 << std::endl;
+	std::cout << "s64 " << (std::string) s64 << std::endl;
+
+	std::cout << std::endl;
+}
+
+
+/**
+ * main
+ */
+int main (int, char *[])
+{
+	test_range();
+
+#if 0
+	Variant bv = -42;
+
+	std::cout << "b   " << (bool)     bv << std::endl;
+	std::cout << "u8  " << (int)      bv << std::endl;
+	std::cout << "s8  " << (int)      bv << std::endl;
+	std::cout << "u16 " << (uint16_t) bv << std::endl;
+	std::cout << "s16 " << (int16_t)  bv << std::endl;
+	std::cout << "u32 " << (uint32_t) bv << std::endl;
+	std::cout << "s32 " << (int32_t)  bv << std::endl;
+	std::cout << "u64 " << (uint64_t) bv << std::endl;
+	std::cout << "s64 " << (int64_t)  bv << std::endl;
+
+	std::cout << std::endl;
+
+	std::cout << "b   " << (std::string) bv << std::endl;
+	std::cout << "u8  " << (std::string) bv << std::endl;
+	std::cout << "s8  " << (std::string) bv << std::endl;
+	std::cout << "u16 " << (std::string) bv << std::endl;
+	std::cout << "s16 " << (std::string) bv << std::endl;
+	std::cout << "u32 " << (std::string) bv << std::endl;
+	std::cout << "s32 " << (std::string) bv << std::endl;
+	std::cout << "u64 " << (std::string) bv << std::endl;
+	std::cout << "s64 " << (std::string) bv << std::endl;
+#endif
 }
 

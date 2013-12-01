@@ -2,7 +2,7 @@ CC	= g++
 RM	= rm -fr
 MKDIR	= mkdir -p
 
-SRC	+= main.cpp variant.cpp
+SRC	+= main.cpp basic.cpp
 
 #HDR	= $(SRC:%.cpp=%.h)
 
