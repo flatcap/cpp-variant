@@ -43,6 +43,20 @@ void test_range (void)
 
 	std::cout << std::endl;
 
+	std::cout << str << std::endl;
+	std::cout << d   << std::endl;
+	std::cout << b   << std::endl;
+	std::cout << u8  << std::endl;
+	std::cout << s8  << std::endl;
+	std::cout << u16 << std::endl;
+	std::cout << s16 << std::endl;
+	std::cout << u32 << std::endl;
+	std::cout << s32 << std::endl;
+	std::cout << u64 << std::endl;
+	std::cout << s64 << std::endl;
+
+	std::cout << std::endl;
+
 	std::cout << "str " << (std::string) str << std::endl;
 	std::cout << "d   " << (double)      d   << std::endl;
 	std::cout << "b   " << (bool)        b   << std::endl;

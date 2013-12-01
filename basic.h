@@ -68,6 +68,9 @@ public:
 	} type;
 
 protected:
+	friend std::ostream & operator<< (std::ostream &os, const Variant *v);
+	friend std::ostream & operator<< (std::ostream &os, const Variant &v);
+
 	union {
 		double   d_value;
 		uint64_t l_value;

@@ -22,7 +22,7 @@
 #include "basic.h"
 
 /**
- * Variant (default) (default)
+ * Variant (default)
  */
 Variant::Variant (void) :
 	type (Tag::t_unset)
@@ -426,6 +426,45 @@ Variant::operator int64_t()
 
 		default:			throw std::runtime_error ("variant: unknown type");
 	}
+}
+
+
+/**
+ * operator<< (Variant*)
+ */
+std::ostream &
+operator<< (std::ostream &os, const Variant *v)
+{
+	if (v)
+		return operator<< (os, *v);
+	else
+		return os;
+}
+
+/**
+ * operator<< (Variant&)
+ */
+std::ostream &
+operator<< (std::ostream &os, const Variant &v)
+{
+	os << "V[";
+	switch (v.type) {
+		case Variant::Tag::t_unset:  os << "EMPTY";                      break;
+		case Variant::Tag::t_string: os << "string," <<       v.s_value; break;
+		case Variant::Tag::t_double: os << "double," <<       v.d_value; break;
+		case Variant::Tag::t_bool:   os << "bool,"   <<       v.l_value; break;
+		case Variant::Tag::t_u8:     os << "u8,"     << (int) v.l_value; break;
+		case Variant::Tag::t_s8:     os << "s8,"     << (int) v.l_value; break;
+		case Variant::Tag::t_u16:    os << "u16,"    <<       v.l_value; break;
+		case Variant::Tag::t_s16:    os << "s16,"    <<       v.l_value; break;
+		case Variant::Tag::t_u32:    os << "u32,"    <<       v.l_value; break;
+		case Variant::Tag::t_s32:    os << "s32,"    <<       v.l_value; break;
+		case Variant::Tag::t_u64:    os << "u64,"    <<       v.l_value; break;
+		case Variant::Tag::t_s64:    os << "s64,"    <<       v.l_value; break;
+	}
+	os << "]";
+
+	return os;
 }
 
 
