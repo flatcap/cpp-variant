@@ -21,23 +21,6 @@
 
 #include "basic.h"
 
-#if 0
-/**
- * Variant (default)
- */
-Variant::Variant (void)
-{
-}
-
-/**
- * ~Variant
- */
-Variant::~Variant()
-{
-}
-
-#endif
-
 /**
  * Variant (std::string)
  */
@@ -146,71 +129,6 @@ Variant::Variant (int64_t value) :
 	l_value = value;
 }
 
-
-#if 0
-/**
- * Variant (copy)
- */
-Variant::Variant (const Variant &v)
-{
-	//std::cout << "ctor copy" << std::endl;
-
-	type    = v.type;
-	s_value = v.s_value;
-	l_value = v.l_value;
-}
-
-/**
- * Variant (move)
- */
-Variant::Variant (Variant &&v)
-{
-	//std::cout << "ctor move" << std::endl;
-	swap (*this, v);
-}
-
-
-/**
- * operator= (copy)
- */
-Variant &
-Variant::operator= (const Variant &v)
-{
-	//std::cout << "assign copy" << std::endl;
-
-	type    = v.type;
-	s_value = v.s_value;
-	l_value = v.l_value;
-
-	return *this;
-}
-
-/**
- * operator= (move)
- */
-Variant &
-Variant::operator= (Variant &&v)
-{
-	//std::cout << "assign move" << std::endl;
-
-	swap (*this, v);
-
-	return *this;
-}
-
-/**
- * swap
- */
-void swap (Variant &first, Variant &second)
-{
-	//std::cout << "ctor copy" << std::endl;
-
-	std::swap (first.type,    second.type);
-	std::swap (first.s_value, second.s_value);
-	std::swap (first.l_value, second.l_value);
-}
-
-#endif
 
 /**
  * cast (string)
@@ -542,7 +460,6 @@ operator<< (std::ostream &os, const Variant &v)
 }
 
 
-#if 1
 /**
  * bool operator==
  */
@@ -603,5 +520,4 @@ operator< (const Variant &lhs, const Variant &rhs)
 	}
 }
 
-#endif
 

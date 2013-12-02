@@ -51,16 +51,6 @@ public:
 	Variant & operator= (const Variant &v)  = default;
 	Variant & operator= (      Variant &&v) = default;
 
-#if 0
-	Variant (const Variant &v);		// copy constructor
-	Variant (Variant &&v);			// move constructor
-
-	Variant & operator= (const Variant &v);	// copy assignment
-	Variant & operator= (Variant &&v);	// move assignment
-
-	friend void swap (Variant &first, Variant &second);
-#endif
-
 	operator std::string (void);		// cast Variant to type
 	operator double      (void);
 	operator bool        (void);
@@ -92,7 +82,6 @@ protected:
 	friend std::ostream & operator<< (std::ostream &os, const Variant *v);
 	friend std::ostream & operator<< (std::ostream &os, const Variant &v);
 
-#if 1
 	friend bool operator== (const Variant &lhs, const Variant &rhs);
 	friend bool operator<  (const Variant &lhs, const Variant &rhs);
 
@@ -100,7 +89,6 @@ protected:
 	inline friend bool operator>  (const Variant &lhs, const Variant &rhs) { return  operator<  (rhs,lhs); }
 	inline friend bool operator<= (const Variant &lhs, const Variant &rhs) { return !operator>  (lhs,rhs); }
 	inline friend bool operator>= (const Variant &lhs, const Variant &rhs) { return !operator<  (lhs,rhs); }
-#endif
 
 	union {
 		double   d_value;
