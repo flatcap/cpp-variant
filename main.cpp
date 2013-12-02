@@ -19,6 +19,9 @@
 #include <stdexcept>
 #include <cstdint>
 #include <limits>
+#include <vector>
+#include <algorithm>
+#include <random>
 
 #include "basic.h"
 
@@ -126,15 +129,11 @@ void test_range (void)
 	std::cout << std::endl;
 }
 
-
 /**
- * main
+ * test_cast
  */
-int main (int, char *[])
+void test_cast (void)
 {
-	test_range();
-
-#if 0
 	Variant bv = -42;
 
 	std::cout << "b   " << (bool)     bv << std::endl;
@@ -158,6 +157,52 @@ int main (int, char *[])
 	std::cout << "s32 " << (std::string) bv << std::endl;
 	std::cout << "u64 " << (std::string) bv << std::endl;
 	std::cout << "s64 " << (std::string) bv << std::endl;
+}
+
+/**
+ * test_compare
+ */
+void test_compare (void)
+{
+	Variant a = 42;
+	Variant b = 42;
+
+	if (a == b)  std::cout << "same\n";
+	else         std::cout << "diff\n";
+
+	if (a > b)   std::cout << "bigger\n";
+	else         std::cout << "!bigger\n";
+
+	if (a < b)   std::cout << "less\n";
+	else         std::cout << "!less\n";
+}
+
+
+/**
+ * main
+ */
+int main (int, char *[])
+{
+#if 0
+	test_range();
+	test_cast();
+	test_compare();
 #endif
+
+	std::vector<Variant> vv;
+	std::default_random_engine generator;
+	std::uniform_int_distribution<int> distribution(0,999);
+
+	for (int i = 0; i < 1000; i++) {
+		vv.push_back (distribution(generator));
+	}
+
+	std::sort (vv.begin(), vv.end());
+
+	for (auto v : vv) {
+		std::cout << (int) v << ", ";
+	}
+	std::cout << std::endl;
+
 }
 

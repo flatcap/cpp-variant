@@ -25,10 +25,15 @@
 class Variant
 {
 public:
-	Variant (void);
+	Variant (void)     = default;
+	virtual ~Variant() = default;
+#if 0
+	Variant (void);				// default constructor
 	virtual ~Variant();
+#endif
 
-	Variant (std::string value);
+	Variant (std::string value);		// typed constructors
+	Variant (char       *value);
 	Variant (double      value);
 	Variant (bool        value);
 	Variant (uint8_t     value);
@@ -40,17 +45,33 @@ public:
 	Variant (uint64_t    value);
 	Variant (int64_t     value);
 
-	operator std::string (void);
+	Variant (const Variant &v)  = default;
+	Variant (      Variant &&v) = default;
+
+	Variant & operator= (const Variant &v)  = default;
+	Variant & operator= (      Variant &&v) = default;
+
+#if 0
+	Variant (const Variant &v);		// copy constructor
+	Variant (Variant &&v);			// move constructor
+
+	Variant & operator= (const Variant &v);	// copy assignment
+	Variant & operator= (Variant &&v);	// move assignment
+
+	friend void swap (Variant &first, Variant &second);
+#endif
+
+	operator std::string (void);		// cast Variant to type
 	operator double      (void);
 	operator bool        (void);
 	operator uint8_t     (void);
-	operator int8_t      (void);
+	operator  int8_t     (void);
 	operator uint16_t    (void);
-	operator int16_t     (void);
+	operator  int16_t    (void);
 	operator uint32_t    (void);
-	operator int32_t     (void);
+	operator  int32_t    (void);
 	operator uint64_t    (void);
-	operator int64_t     (void);
+	operator  int64_t    (void);
 
 	enum class Tag {
 		t_unset,	// Empty
@@ -58,22 +79,32 @@ public:
 		t_double,	// Floating point
 		t_bool,		//  1 bit
 		t_u8,		//  8 bits unsigned integer
-		t_s8,		//         signed
+		t_s8,		//           signed
 		t_u16,		// 16 bits unsigned integer
-		t_s16,		//         signed
+		t_s16,		//           signed
 		t_u32,		// 32 bits unsigned integer
-		t_s32,		//         signed
+		t_s32,		//           signed
 		t_u64,		// 64 bits unsigned integer
-		t_s64		//         signed
-	} type;
+		t_s64		//           signed
+	} type = Tag::t_unset;
 
 protected:
 	friend std::ostream & operator<< (std::ostream &os, const Variant *v);
 	friend std::ostream & operator<< (std::ostream &os, const Variant &v);
 
+#if 1
+	friend bool operator== (const Variant &lhs, const Variant &rhs);
+	friend bool operator<  (const Variant &lhs, const Variant &rhs);
+
+	inline friend bool operator!= (const Variant &lhs, const Variant &rhs) { return !operator== (lhs,rhs); }
+	inline friend bool operator>  (const Variant &lhs, const Variant &rhs) { return  operator<  (rhs,lhs); }
+	inline friend bool operator<= (const Variant &lhs, const Variant &rhs) { return !operator>  (lhs,rhs); }
+	inline friend bool operator>= (const Variant &lhs, const Variant &rhs) { return !operator<  (lhs,rhs); }
+#endif
+
 	union {
 		double   d_value;
-		uint64_t l_value;
+		uint64_t l_value = 0;
 	};
 	std::string s_value;
 };

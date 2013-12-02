@@ -21,11 +21,11 @@
 
 #include "basic.h"
 
+#if 0
 /**
  * Variant (default)
  */
-Variant::Variant (void) :
-	type (Tag::t_unset)
+Variant::Variant (void)
 {
 }
 
@@ -36,11 +36,21 @@ Variant::~Variant()
 {
 }
 
+#endif
 
 /**
  * Variant (std::string)
  */
 Variant::Variant (std::string value) :
+	type (Tag::t_string)
+{
+	s_value = value;
+}
+
+/**
+ * Variant (char*)
+ */
+Variant::Variant (char *value) :
 	type (Tag::t_string)
 {
 	s_value = value;
@@ -137,6 +147,71 @@ Variant::Variant (int64_t value) :
 }
 
 
+#if 0
+/**
+ * Variant (copy)
+ */
+Variant::Variant (const Variant &v)
+{
+	//std::cout << "ctor copy" << std::endl;
+
+	type    = v.type;
+	s_value = v.s_value;
+	l_value = v.l_value;
+}
+
+/**
+ * Variant (move)
+ */
+Variant::Variant (Variant &&v)
+{
+	//std::cout << "ctor move" << std::endl;
+	swap (*this, v);
+}
+
+
+/**
+ * operator= (copy)
+ */
+Variant &
+Variant::operator= (const Variant &v)
+{
+	//std::cout << "assign copy" << std::endl;
+
+	type    = v.type;
+	s_value = v.s_value;
+	l_value = v.l_value;
+
+	return *this;
+}
+
+/**
+ * operator= (move)
+ */
+Variant &
+Variant::operator= (Variant &&v)
+{
+	//std::cout << "assign move" << std::endl;
+
+	swap (*this, v);
+
+	return *this;
+}
+
+/**
+ * swap
+ */
+void swap (Variant &first, Variant &second)
+{
+	//std::cout << "ctor copy" << std::endl;
+
+	std::swap (first.type,    second.type);
+	std::swap (first.s_value, second.s_value);
+	std::swap (first.l_value, second.l_value);
+}
+
+#endif
+
 /**
  * cast (string)
  */
@@ -161,7 +236,6 @@ Variant::operator std::string (void)
 
 		default:			throw std::runtime_error ("variant: unknown type");
 	}
-	return s_value;
 }
 
 /**
@@ -467,4 +541,67 @@ operator<< (std::ostream &os, const Variant &v)
 	return os;
 }
 
+
+#if 1
+/**
+ * bool operator==
+ */
+bool
+operator== (const Variant &lhs, const Variant &rhs)
+{
+	if (lhs.type != rhs.type)
+		return false;
+
+	switch (lhs.type) {
+		case Variant::Tag::t_string:	return (lhs.s_value == rhs.s_value);
+
+		case Variant::Tag::t_double:	return (lhs.d_value == rhs.d_value);
+
+		case Variant::Tag::t_bool:
+		case Variant::Tag::t_u8:
+		case Variant::Tag::t_s8:
+		case Variant::Tag::t_u16:
+		case Variant::Tag::t_s16:
+		case Variant::Tag::t_u32:
+		case Variant::Tag::t_s32:
+		case Variant::Tag::t_u64:
+		case Variant::Tag::t_s64:	return (lhs.l_value == rhs.l_value);
+
+		case Variant::Tag::t_unset:	return true;
+
+		default:			throw std::runtime_error ("variant: unknown type");
+	}
+}
+
+/**
+ * bool operator<
+ */
+bool
+operator< (const Variant &lhs, const Variant &rhs)
+{
+	if (lhs.type != rhs.type)
+		throw std::runtime_error ("variant: wrong type");
+
+	switch (lhs.type) {
+		case Variant::Tag::t_string:	return (lhs.s_value < rhs.s_value);
+
+		case Variant::Tag::t_double:	return (lhs.d_value < rhs.d_value);
+
+		case Variant::Tag::t_bool:
+		case Variant::Tag::t_u8:
+		case Variant::Tag::t_s8:
+		case Variant::Tag::t_u16:
+		case Variant::Tag::t_s16:
+		case Variant::Tag::t_u32:
+		case Variant::Tag::t_s32:
+		case Variant::Tag::t_u64:
+		case Variant::Tag::t_s64:	return (lhs.l_value < rhs.l_value);
+
+		case Variant::Tag::t_unset:	return true;
+
+		default:			throw std::runtime_error ("variant: unknown type");
+	}
+}
+
+#endif
 
