@@ -185,21 +185,21 @@ test_swap (void)
  */
 void cast01 (void)
 {
-	Variant v;
+	Variant v1;
 
-	std::cout << v << '\n';
+	std::cout << v1 << '\n';
 
-	try { string   a01 = (string)   v; std::cout << "success: (string)   a01 = " <<       a01 << "\n"; } catch (exception &e) { std::cout << "error:   (string)   a01 = " << e.what() << "\n"; }
-	try { double   a02 = (double)   v; std::cout << "success: (double)   a02 = " <<       a02 << "\n"; } catch (exception &e) { std::cout << "error:   (double)   a02 = " << e.what() << "\n"; }
-	try { bool     a03 = (bool)     v; std::cout << "success: (bool)     a03 = " <<       a03 << "\n"; } catch (exception &e) { std::cout << "error:   (bool)     a03 = " << e.what() << "\n"; }
-	try { uint8_t  a04 = (uint8_t)  v; std::cout << "success: (uint8_t)  a04 = " << (int) a04 << "\n"; } catch (exception &e) { std::cout << "error:   (uint8_t)  a04 = " << e.what() << "\n"; }
-	try { int8_t   a05 = (int8_t)   v; std::cout << "success: (int8_t)   a05 = " << (int) a05 << "\n"; } catch (exception &e) { std::cout << "error:   (int8_t)   a05 = " << e.what() << "\n"; }
-	try { uint16_t a06 = (uint16_t) v; std::cout << "success: (uint16_t) a06 = " <<       a06 << "\n"; } catch (exception &e) { std::cout << "error:   (uint16_t) a06 = " << e.what() << "\n"; }
-	try { int16_t  a07 = (int16_t)  v; std::cout << "success: (int16_t)  a07 = " <<       a07 << "\n"; } catch (exception &e) { std::cout << "error:   (int16_t)  a07 = " << e.what() << "\n"; }
-	try { uint32_t a08 = (uint32_t) v; std::cout << "success: (uint32_t) a08 = " <<       a08 << "\n"; } catch (exception &e) { std::cout << "error:   (uint32_t) a08 = " << e.what() << "\n"; }
-	try { int32_t  a09 = (int32_t)  v; std::cout << "success: (int32_t)  a09 = " <<       a09 << "\n"; } catch (exception &e) { std::cout << "error:   (int32_t)  a09 = " << e.what() << "\n"; }
-	try { uint64_t a10 = (uint64_t) v; std::cout << "success: (uint64_t) a10 = " <<       a10 << "\n"; } catch (exception &e) { std::cout << "error:   (uint64_t) a10 = " << e.what() << "\n"; }
-	try { int64_t  a11 = (int64_t)  v; std::cout << "success: (int64_t)  a11 = " <<       a11 << "\n"; } catch (exception &e) { std::cout << "error:   (int64_t)  a11 = " << e.what() << "\n"; }
+	try { string   a01 = (string)   v1; std::cout << "success: (string)   a01 = " <<       a01 << "\n"; } catch (exception &e) { std::cout << "error:   (string)   a01 = " << e.what() << "\n"; }
+	try { double   a02 = (double)   v1; std::cout << "success: (double)   a02 = " <<       a02 << "\n"; } catch (exception &e) { std::cout << "error:   (double)   a02 = " << e.what() << "\n"; }
+	try { bool     a03 = (bool)     v1; std::cout << "success: (bool)     a03 = " <<       a03 << "\n"; } catch (exception &e) { std::cout << "error:   (bool)     a03 = " << e.what() << "\n"; }
+	try { uint8_t  a04 = (uint8_t)  v1; std::cout << "success: (uint8_t)  a04 = " << (int) a04 << "\n"; } catch (exception &e) { std::cout << "error:   (uint8_t)  a04 = " << e.what() << "\n"; }
+	try { int8_t   a05 = (int8_t)   v1; std::cout << "success: (int8_t)   a05 = " << (int) a05 << "\n"; } catch (exception &e) { std::cout << "error:   (int8_t)   a05 = " << e.what() << "\n"; }
+	try { uint16_t a06 = (uint16_t) v1; std::cout << "success: (uint16_t) a06 = " <<       a06 << "\n"; } catch (exception &e) { std::cout << "error:   (uint16_t) a06 = " << e.what() << "\n"; }
+	try { int16_t  a07 = (int16_t)  v1; std::cout << "success: (int16_t)  a07 = " <<       a07 << "\n"; } catch (exception &e) { std::cout << "error:   (int16_t)  a07 = " << e.what() << "\n"; }
+	try { uint32_t a08 = (uint32_t) v1; std::cout << "success: (uint32_t) a08 = " <<       a08 << "\n"; } catch (exception &e) { std::cout << "error:   (uint32_t) a08 = " << e.what() << "\n"; }
+	try { int32_t  a09 = (int32_t)  v1; std::cout << "success: (int32_t)  a09 = " <<       a09 << "\n"; } catch (exception &e) { std::cout << "error:   (int32_t)  a09 = " << e.what() << "\n"; }
+	try { uint64_t a10 = (uint64_t) v1; std::cout << "success: (uint64_t) a10 = " <<       a10 << "\n"; } catch (exception &e) { std::cout << "error:   (uint64_t) a10 = " << e.what() << "\n"; }
+	try { int64_t  a11 = (int64_t)  v1; std::cout << "success: (int64_t)  a11 = " <<       a11 << "\n"; } catch (exception &e) { std::cout << "error:   (int64_t)  a11 = " << e.what() << "\n"; }
 
 	std::cout << std::endl;
 }
@@ -389,7 +389,7 @@ void cast04 (void)
  */
 void cast05 (void)
 {
-	Variant v1 (true);
+	Variant v1 (std::numeric_limits<bool>::min());
 
 	std::cout << v1 << '\n';
 
@@ -407,7 +407,7 @@ void cast05 (void)
 
 	std::cout << std::endl;
 
-	Variant v2 (false);
+	Variant v2 (std::numeric_limits<bool>::max());
 
 	std::cout << v2 << '\n';
 
@@ -491,7 +491,7 @@ void cast06 (void)
  */
 void cast07 (void)
 {
-	Variant v1 ((int8_t) 42);
+	Variant v1 ((int8_t) -42);
 
 	std::cout << v1 << '\n';
 

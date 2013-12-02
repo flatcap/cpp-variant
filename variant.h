@@ -28,13 +28,7 @@
 class Variant
 {
 public:
-	//Variant (void)     = default;
-	Variant (void)
-	{
-		random();
-	}
-	void random (void);
-
+	Variant (void)     = default;
 	virtual ~Variant() = default;
 
 	Variant (std::string value);		// typed constructors

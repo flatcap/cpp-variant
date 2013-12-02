@@ -21,23 +21,12 @@
 
 #include "variant.h"
 
-#include <cstdlib>	// Random stuff
-#include <time.h>
-void Variant::random (void)
-{
-	l_value = rand();
-	l_value <<= 32;
-	l_value += rand();
-	std::cout << l_value << std::endl;
-}
-
 /**
  * Variant (std::string)
  */
 Variant::Variant (std::string value) :
 	type (Tag::t_string)
 {
-	random();
 	s_value = value;
 }
 
@@ -47,7 +36,6 @@ Variant::Variant (std::string value) :
 Variant::Variant (const char* value) :
 	type (Tag::t_string)
 {
-	random();
 	s_value = value;
 }
 
@@ -57,7 +45,6 @@ Variant::Variant (const char* value) :
 Variant::Variant (double value) :
 	type (Tag::t_double)
 {
-	random();
 	d_value = value;
 }
 
@@ -67,7 +54,6 @@ Variant::Variant (double value) :
 Variant::Variant (bool value) :
 	type (Tag::t_bool)
 {
-	random();
 	l_value = value;
 }
 
@@ -77,7 +63,6 @@ Variant::Variant (bool value) :
 Variant::Variant (uint8_t value) :
 	type (Tag::t_u8)
 {
-	random();
 	l_value = value;
 }
 
@@ -87,7 +72,6 @@ Variant::Variant (uint8_t value) :
 Variant::Variant (int8_t value) :
 	type (Tag::t_s8)
 {
-	random();
 	l_value = value;
 }
 
@@ -97,7 +81,6 @@ Variant::Variant (int8_t value) :
 Variant::Variant (uint16_t value) :
 	type (Tag::t_u16)
 {
-	random();
 	l_value = value;
 }
 
@@ -107,7 +90,6 @@ Variant::Variant (uint16_t value) :
 Variant::Variant (int16_t value) :
 	type (Tag::t_s16)
 {
-	random();
 	l_value = value;
 }
 
@@ -117,7 +99,6 @@ Variant::Variant (int16_t value) :
 Variant::Variant (uint32_t value) :
 	type (Tag::t_u32)
 {
-	random();
 	l_value = value;
 }
 
@@ -127,7 +108,6 @@ Variant::Variant (uint32_t value) :
 Variant::Variant (int32_t value) :
 	type (Tag::t_s32)
 {
-	random();
 	l_value = value;
 }
 
@@ -137,7 +117,6 @@ Variant::Variant (int32_t value) :
 Variant::Variant (uint64_t value) :
 	type (Tag::t_u64)
 {
-	random();
 	l_value = value;
 }
 
@@ -147,7 +126,6 @@ Variant::Variant (uint64_t value) :
 Variant::Variant (int64_t value) :
 	type (Tag::t_s64)
 {
-	random();
 	l_value = value;
 }
 
@@ -465,18 +443,18 @@ operator<< (std::ostream& os, const Variant& v)
 {
 	os << "V[";
 	switch (v.type) {
-		case Variant::Tag::t_unset:  os << "EMPTY";                      break;
-		case Variant::Tag::t_string: os << "string," <<       v.s_value; break;
-		case Variant::Tag::t_double: os << "double," <<       v.d_value; break;
-		case Variant::Tag::t_bool:   os << "bool,"   <<       v.l_value; break;
-		case Variant::Tag::t_u8:     os << "u8,"     << (int) v.l_value; break;
-		case Variant::Tag::t_s8:     os << "s8,"     << (int) v.l_value; break;
-		case Variant::Tag::t_u16:    os << "u16,"    <<       v.l_value; break;
-		case Variant::Tag::t_s16:    os << "s16,"    <<       v.l_value; break;
-		case Variant::Tag::t_u32:    os << "u32,"    <<       v.l_value; break;
-		case Variant::Tag::t_s32:    os << "s32,"    <<       v.l_value; break;
-		case Variant::Tag::t_u64:    os << "u64,"    <<       v.l_value; break;
-		case Variant::Tag::t_s64:    os << "s64,"    <<       v.l_value; break;
+		case Variant::Tag::t_unset:  os << "EMPTY";                              break;
+		case Variant::Tag::t_string: os << "string," <<               v.s_value; break;
+		case Variant::Tag::t_double: os << "double," <<               v.d_value; break;
+		case Variant::Tag::t_bool:   os << "bool,"   <<               v.l_value; break;
+		case Variant::Tag::t_u8:     os << "u8,"     <<               v.l_value; break;
+		case Variant::Tag::t_s8:     os << "s8,"     << (signed long) v.l_value; break;
+		case Variant::Tag::t_u16:    os << "u16,"    <<               v.l_value; break;
+		case Variant::Tag::t_s16:    os << "s16,"    << (signed long) v.l_value; break;
+		case Variant::Tag::t_u32:    os << "u32,"    <<               v.l_value; break;
+		case Variant::Tag::t_s32:    os << "s32,"    << (signed long) v.l_value; break;
+		case Variant::Tag::t_u64:    os << "u64,"    <<               v.l_value; break;
+		case Variant::Tag::t_s64:    os << "s64,"    << (signed long) v.l_value; break;
 	}
 	os << "]";
 
